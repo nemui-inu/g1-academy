@@ -6,10 +6,17 @@ A simple yet powerful web application for managing students, courses, subjects, 
 
 ```
 $PROJECT_ROOT
-├── App.tsx        # Entry point
-└── src
-    ├── screens    # Screen components
-    ├── components # UI components
-    ├── utils      # Custom hooks and helpers
-    └── assets     # Image files
+├── index.php      # Entry point
+├── controllers
+├── models
+└── views
+    ├── login
+    ├── dashboard
+    ├── student
+    ├── course
+    ├── subject
+    ├── instructor
+    ├── admin
+    ├── grades
+    └── errors
 ```
