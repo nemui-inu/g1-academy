@@ -6,17 +6,10 @@ A simple yet powerful web application for managing students, courses, subjects, 
 
 ```
 $PROJECT_ROOT
-├── index.php      # Entry point
 ├── controllers
+├── index.php      # Entry point
+├── layout
 ├── models
+├── public
 └── views
-    ├── login
-    ├── dashboard
-    ├── student
-    ├── course
-    ├── subject
-    ├── instructor
-    ├── admin
-    ├── grades
-    └── errors
 ```
