@@ -61,18 +61,18 @@ class Grades extends Model
   public function save()
   {
     $data = [
-      'name' => $this->name,
-      'email' => $this->email,
-      'password' => $this->password,
-      'role' => $this->role,
-      'status' => $this->status,
+      'student_id' => $this->student_id,
+      'subject_id' => $this->subject_id,
+      'instructor_id' => $this->instructor_id,
+      'grade' => $this->grade,
+      'remarks' => $this->remarks,
     ];
     $this->update($data);
   }
 
   public function delete()
   {
-    $result = parent::deleteById($this->user_id);
+    $result = parent::deleteById($this->grade_id);
 
     if ($result) {
       foreach ($this as $key => $value) {
