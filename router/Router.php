@@ -2,17 +2,17 @@
 
 class Router
 {
-  private array $routes = [];
+  private static array $routes = [];
 
-  public function add(string $path, Closure $handler): void
+  public static function add(string $path, Closure $handler): void
   {
-    $this->routes[$path] = $handler;
+    self::$routes[$path] = $handler;
   }
 
-  public function dispatch(string $path): void
+  public static function dispatch(string $path): void
   {
-    if (array_key_exists($path, $this->routes)) {
-      $handler = $this->routes[$path];
+    if (array_key_exists($path, self::$routes)) {
+      $handler = self::$routes[$path];
       call_user_func($handler);
     } else {
       http_response_code(404);
