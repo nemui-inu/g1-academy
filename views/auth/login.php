@@ -1,5 +1,6 @@
 <?php
 include 'layout/header.php';
+session_start();
 ?>
 
 <div class="w-100 vh-100 bg-navy d-flex justify-content-center align-items-center">
@@ -14,15 +15,23 @@ include 'layout/header.php';
         <p class="m-0 lh-1">System</p>
       </div>
     </div>
-    <form action="#" method="post" class="w-100 d-flex flex-column gap-4 fw-bold">
+    <form action="/group1/login" method="POST" class="w-100 d-flex flex-column gap-4 fw-bold">
+      <?php if (!empty($_SESSION['error'])): ?>
+        <div class="alert alert-danger mb-0 py-2 px-3 bg-red text-cream">
+          <?=
+          $_SESSION['error'];
+          unset($_SESSION['error']);
+          ?>
+        </div>
+      <?php endif; ?>
       <div class="d-flex flex-column gap-3">
         <div>
-          <label for="username" class="form-label">Username</label>
-          <input type="text" class="form-control font-monospace fw-bold rounded-3 border-navy" id="username" name="username" placeholder="John Doe" required />
+          <label for="username" class="form-label">Email</label>
+          <input type="text" class="form-control font-monospace fw-bold rounded-3 border-navy" id="username" name="username" placeholder="johndoe@email.com" required />
         </div>
         <div>
           <label for="username" class="form-label">Password</label>
-          <input type="password" class="form-control font-monospace fw-bold rounded-3 border-navy" id="password" name="password" placeholder="Password" required />
+          <input type="password" class="form-control font-monospace fw-bold rounded-3 border-navy" id="password" name="password" placeholder="****************" required />
         </div>
       </div>
       <div>
