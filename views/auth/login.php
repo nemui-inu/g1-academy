@@ -1,12 +1,12 @@
 <?php
-include '../../layout/header.php';
+include 'layout/header.php';
 ?>
 
 <div class="w-100 vh-100 bg-navy d-flex justify-content-center align-items-center">
   <div class="bg-cream text-navy p-4 rounded-4 shadow-sm d-flex flex-column gap-4 align-items-center justify-content-center" style="width: 350px; height: auto;">
     <div class="row gx-1">
       <div class="col-6">
-        <img src="../../public/svg/logo-2.svg" alt="G1 Academy Logo" class="img-fluid" style="width: 100px; height: auto;" />
+        <img src="public/svg/logo-2.svg" alt="G1 Academy Logo" class="img-fluid" style="width: 100px; height: auto;" />
       </div>
       <div class="col-6 d-flex flex-column gap-0 margin-0 fw-bold fs-5">
         <p class="m-0 lh-1">Student</p>
@@ -33,5 +33,5 @@ include '../../layout/header.php';
 </div>
 
 <?php
-include '../../layout/footer.php';
+include 'layout/footer.php';
 ?>
