@@ -2,6 +2,13 @@
   * Fontface: Roboto, Bebas Neue
   * Color Scheme: Solarized Light
 */
+.login-body {
+  background-image: url('public/img/bg-1.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 @import "../../node_modules/bootstrap/scss/_functions.scss";
@@ -27,6 +34,7 @@ $theme-colors: map-merge($custom-theme-colors, $theme-colors);
 
 body {
   font-family: "Roboto", sans-serif;
+  overflow-x: hidden;
 }
 
 .roboto-regular {
@@ -52,3 +60,30 @@ body {
   font-weight: 400;
   font-style: normal;
 }
+
+.login-body {
+    background-image: url('../img/bg-1.jpg');
+    background-size: 125%;
+    background-position: 100% 50%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  .contrast {
+    background-color: hsla(0, 0%, 0%, 0.80);
+  }
+
+  .password-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  .peek-toggle {
+    position: absolute;
+    top: 75%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }

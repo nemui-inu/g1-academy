@@ -7,12 +7,21 @@ class LoginController
 {
   public static function index(): void
   {
+    if ($_SESSION['user'] ?? null) {
+      header('Location: /group1/dashboard');
+      exit;
+    }
+    require 'layout/header.php';
     require 'views/auth/login.php';
+    require 'layout/footer.php';
   }
 
   public static function login(): void
   {
-    session_start();
+    if ($_SESSION['user'] ?? null) {
+      header('Location: /group1/dashboard');
+      exit;
+    }
 
     $email = $_POST['email'] ?? null;
     $password = $_POST['password'] ?? null;
@@ -23,9 +32,9 @@ class LoginController
 
     $user = User::findByEmail($email);
 
-    if ($user && password_verify($password, $user->password)) {
+    if ($user && password_verify($password, $user['password'])) {
       $_SESSION['user'] = $user;
-      header('Location: /dashboard');
+      header('Location: /group1/dashboard');
       exit;
     } else {
       $_SESSION['error'] = 'Invalid email or password';
@@ -37,7 +46,7 @@ class LoginController
   {
     session_start();
     session_destroy();
-    header('Location: /login');
+    header('Location: /group1/login');
     exit;
   }
 }
