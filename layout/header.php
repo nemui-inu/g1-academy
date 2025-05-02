@@ -6,6 +6,7 @@
   <title>G1 Academy</title>
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="public/css/main.min.css">
 </head>
 <body>
   

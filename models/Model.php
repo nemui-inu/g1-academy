@@ -26,7 +26,7 @@ class Model
   public static function find($id)
   {
     try {
-      $sql = 'select * from ' . static::$table . ' where id = :id;';
+      $sql = 'select * from ' . static::$table . ' where id = ?;';
       $stmt = self::$conn->prepare($sql);
       $stmt->execute([$id]);
       $result = $stmt->fetchAll();

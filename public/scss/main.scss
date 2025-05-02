@@ -1,0 +1,89 @@
+/*
+  * Fontface: Roboto, Bebas Neue
+  * Color Scheme: Solarized Light
+*/
+.login-body {
+  background-image: url('public/img/bg-1.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import "../../node_modules/bootstrap/scss/_functions.scss";
+@import "../../node_modules/bootstrap/scss/_variables.scss";
+
+$custom-theme-colors: (
+  'navy': #222849,
+  'cream': #E0DCD3,
+  'cream-2': hsla(42, 17%, 85%, 0.75),
+  'beige': #FDEBD5,
+  'yellow': #C5A474,
+  'yellow-2': hsl(36, 66%, 61%),
+  'red': #A53C3D,
+  'black': #232126,
+  'gray': #4B494C,
+  'green': #588157
+);
+
+$theme-colors: map-merge($custom-theme-colors, $theme-colors);
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+
+body {
+  font-family: "Roboto", sans-serif;
+  overflow-x: hidden;
+}
+
+.roboto-regular {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+.roboto-bold {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+.bebas-neue-regular {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.login-body {
+    background-image: url('../img/bg-1.jpg');
+    background-size: 125%;
+    background-position: 100% 50%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  .contrast {
+    background-color: hsla(0, 0%, 0%, 0.80);
+  }
+
+  .password-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  .peek-toggle {
+    position: absolute;
+    top: 75%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
