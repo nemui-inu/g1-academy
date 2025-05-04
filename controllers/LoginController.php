@@ -1,22 +1,19 @@
 <?php declare(strict_types=1);
 
+require_once 'controllers/Controller.php';
 require_once 'models/User.php';
 require_once 'models/Database.php';
 
-class LoginController
+class LoginController extends Controller
 {
+  protected static string $route = '/login';
+
   public static function index(): void
   {
-    if ($_SESSION['user'] ?? null) {
-      header('Location: /group1/dashboard');
-      exit;
-    }
-    require 'layout/header.php';
-    require 'views/auth/login.php';
-    require 'layout/footer.php';
+    Controller::load(self::$route);
   }
 
-  public static function login(): void
+  public static function login(): void  // (i) form action
   {
     if ($_SESSION['user'] ?? null) {
       header('Location: /group1/dashboard');

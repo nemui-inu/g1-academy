@@ -11,7 +11,7 @@ if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
 
-Router::add('/', fn() => (isset($_SESSION['user'])) ? require 'views/dashboard/test.php' : LoginController::index());
+Router::add('/', fn() => LoginController::index());
 Router::add('/login', function () {
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     LoginController::login();
