@@ -2,15 +2,14 @@
 
 class Controller
 {
-  public static function load(string $route): void
+  public static function load(string $dir): void
   {
-    if ($_SESSION['user'] ?? null) {
-      header('Location: ' . $route);
+    if (!isset($_SESSION['user']) && $dir !== 'views/auth/login.php') {
+      header('Location: /group1/login');
       exit;
-    } else {
-      require 'layout/header.php';
-      require 'views/auth/login.php';
-      require 'layout/footer.php';
     }
+    require 'layout/header.php';
+    require $dir;
+    require 'layout/footer.php';
   }
 }

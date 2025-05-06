@@ -24,7 +24,8 @@ $custom-theme-colors: (
   'red': #A53C3D,
   'black': #232126,
   'gray': #4B494C,
-  'green': #588157
+  'green': #588157,
+  'dirtywhite': #F8F8F8,
 );
 
 $theme-colors: map-merge($custom-theme-colors, $theme-colors);

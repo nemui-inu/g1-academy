@@ -2,6 +2,7 @@
 
 require 'router/Router.php';
 require 'controllers/LoginController.php';
+require 'controllers/DashboardController.php';
 
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $folder = '/group1';
@@ -20,6 +21,7 @@ Router::add('/login', function () {
   }
 });
 Router::add('/logout', fn() => LoginController::logout());
-Router::add('/dashboard', fn() => (isset($_SESSION['user'])) ? require 'views/dashboard/test.php' : LoginController::index());
+
+Router::add('/dashboard', fn() => DashboardController::index());
 
 Router::dispatch($path);

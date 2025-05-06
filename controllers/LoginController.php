@@ -6,11 +6,11 @@ require_once 'models/Database.php';
 
 class LoginController extends Controller
 {
-  protected static string $route = '/login';
+  protected static string $dir = 'views/auth/login.php';
 
   public static function index(): void
   {
-    Controller::load(self::$route);
+    Controller::load(self::$dir);
   }
 
   public static function login(): void  // (i) form action
