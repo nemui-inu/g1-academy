@@ -1,6 +1,18 @@
-<div class="w-100 vh-100 bg-dirtywhite d-flex justify-content-center align-items-center">
-  <div class="w-25 bg-white p-4 rounded-3 shadow-sm d-flex flex-column gap-3">
-    <p class="text-navy fw-semibold text-center">You have logged in.</p>
-    <a href="/group1/logout" class="btn btn-red">Logout</a>
+<!-- (~) Main Container -->
+<div class="w-100 vh-100 bg-dirtywhite">
+    <!-- (~) Main Row -->
+  <div class="d-flex flex-row gap-3">
+    <!-- (~) Sidebar Column -->
+    <div class="d-flex flex-column gap-3 p-3 pe-0 vh-100" style="width: 300px;">
+      <?php include_once 'layout/components/sidebar.php'; ?>
+    </div>
+    <!-- (~) Content Column -->
+    <div class="d-flex flex-column p-3 ps-0 w-100 gap-3">
+      <?php include_once 'layout/components/topbar.php'; ?>
+      <!-- (~) Content goes below this point -->
+      <div class="w-100">
+        <?php include_once 'views/dashboard/dash_admin.php'; ?>
+      </div>
+    </div>
   </div>
 </div>
