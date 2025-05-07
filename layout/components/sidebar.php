@@ -1,5 +1,5 @@
 <!-- (~) Sidebar Container -->
-<div class="w-100 h-100 bg-white shadow-sm rounded-3 d-flex flex-column justify-content-between pt-4 pb-2" style="position: sticky;">
+<div class="bg-white shadow-sm rounded-3 d-flex flex-column justify-content-between pt-4 pb-2" style="height: calc(100% - 32px); width: 235px; position: fixed;">
   <!-- (~) Top Part / Logo & Links -->
   <div class="d-flex flex-column">
     <!-- (~) Logo Face -->
