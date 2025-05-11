@@ -11,6 +11,11 @@ class DashboardController extends Controller
 
   public static function index(): void
   {
+    $_SESSION['page'] = 'dashboard';
+    $_SESSION['path'] = [
+      'Dashboard' => '/group1/dashboard',
+      'Overview' => '/group1/dashboard'
+    ];
     Controller::load(self::$dir);
   }
 

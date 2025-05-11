@@ -28,12 +28,12 @@ $icons = [
   <div class="d-flex flex-row gap-3">
     <?php $i = 0;
     foreach ($totals as $key => $trigger): ?>
-    <div class="container-fluid p-0 m-0 py-2 ps-4 pe-5 bg-white rounded-3 d-flex flex-column gap-0 justify-content-center shadow-sm">
-        <div class="d-flex flex-row align-items-center justify-content-start gap-2">
-          <?= $icons[$i++] ?>
-          <p class="mb-0 roboto-regular text-navy opacity-75 fw-semibold"><?= $key; ?></p>
-        </div>
+    <div class="container-fluid m-0 px-4 pt-3 pb-4 bg-white rounded-3 d-flex flex-row gap-0 justify-content-between align-items-center shadow-sm">
         <p class="mb-0 roboto-mono-bold text-navy lh-1" style="font-size: 34px;"><?= $trigger ?></p>
+        <div class="d-flex flex-row align-items-center justify-content-start gap-2">
+          <p class="mb-0 roboto-regular text-navy opacity-75 fw-semibold"><?= $key; ?></p>
+          <?= $icons[$i++] ?>
+        </div>
     </div>
     <?php endforeach; ?>
   </div>
@@ -86,8 +86,8 @@ $icons = [
           <div class="d-flex flex-row align-items-center gap-3">
             <img src="public/img/avatar.jpg" alt="avatar" class="rounded-circle" style="width: 32px; height: 32px; object-fit: cover; object-position: 0% 25%;" />
             <div class="d-flex flex-column gap-0">
-              <p class="fw-bold mb-0">Jan Bautista</p>
-              <p class="mb-0 opacity-75" style="font-size: 12px;">jan.bautista@instructor.com</p>
+              <p class="fw-bold mb-0">Prese Hoarder</p>
+              <p class="mb-0 opacity-75" style="font-size: 12px;">prese.horder@placeholder.com</p>
             </div>
           </div>
           <a href="/group1/dashboard" class="btn btn-sm px-3 btn-navy rounded-1 d-flex align-items-center justify-content-center">Details</a>

@@ -2,18 +2,13 @@
 
 require_once 'Model.php';
 
-class Student extends Model
+class Course extends Model
 {
-  protected static $table = 'students';
+  protected static $table = 'courses';
 
-  public $id;
-  public $student_id;
-  public $name;
-  public $gender;
-  public $birthdate;
   public $course_id;
-  public $year_level;
-  public $status;
+  public $code;
+  public $name;
   public $created_at;
   public $updated_at;
 
@@ -26,10 +21,10 @@ class Student extends Model
     }
   }
 
-  public static function all(): ?array
+  public static function all()
   {
     $result = parent::all();
-    return $result ? (array) array_map(fn($data) => new self($data), $result) : null;
+    return $result ? array_map(fn($data) => new self($data), $result) : null;
   }
 
   public static function find($id)
@@ -46,7 +41,7 @@ class Student extends Model
 
   public function update($data)
   {
-    $result = parent::updateById($this->id, $data);
+    $result = parent::updateById($this->user_id, $data);
 
     if ($result) {
       foreach ($data as $key => $value) {
@@ -63,20 +58,15 @@ class Student extends Model
   public function save()
   {
     $data = [
-      'student_id' => $this->student_id,
-      'name' => $this->name,
-      'gender' => $this->gender,
-      'birthdate' => $this->birthdate,
-      'course_id' => $this->course_id,
-      'year_level' => $this->year_level,
-      'status' => $this->gender,
+      'code' => $this->email,
+      'name' => $this->password,
     ];
     $this->update($data);
   }
 
   public function delete()
   {
-    $result = parent::deleteById($this->id);
+    $result = parent::deleteById($this->user_id);
 
     if ($result) {
       foreach ($this as $key => $value) {
@@ -88,5 +78,17 @@ class Student extends Model
     } else {
       return false;
     }
+  }
+
+  public static function getCourses(): array
+  {
+    $db = new Database();
+    $conn = $db->getConnection();
+
+    $query = 'SELECT course_id, code FROM courses';
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+
+    return $stmt->fetchAll();
   }
 }

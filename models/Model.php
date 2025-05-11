@@ -13,8 +13,9 @@ class Model
   public static function all()
   {
     try {
-      $sql = 'select * from' . static::$table . ';';
+      $sql = 'select * from ' . static::$table . ';';
       $stmt = self::$conn->prepare($sql);
+      $stmt->execute();
       $result = $stmt->fetchAll();
 
       return count($result) > 0 ? $result : null;

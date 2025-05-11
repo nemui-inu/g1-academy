@@ -1,8 +1,9 @@
 <?php declare(strict_types=1);
 
-require 'router/Router.php';
-require 'controllers/LoginController.php';
-require 'controllers/DashboardController.php';
+require_once 'router/Router.php';
+require_once 'controllers/LoginController.php';
+require_once 'controllers/DashboardController.php';
+require_once 'controllers/StudentController.php';
 
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $folder = '/group1';
@@ -23,5 +24,10 @@ Router::add('/login', function () {
 Router::add('/logout', fn() => LoginController::logout());
 
 Router::add('/dashboard', fn() => DashboardController::index());
+
+Router::add('/students-create', fn() => StudentController::create());
+Router::add('/students-addstudent', fn() => StudentController::add());
+Router::add('/students', fn() => StudentController::index());
+Router::add('/studenttable', fn() => require 'ajax.php');  // (<-) Ajax Route
 
 Router::dispatch($path);
