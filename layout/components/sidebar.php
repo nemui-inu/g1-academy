@@ -32,6 +32,10 @@
         <i class="bi bi-book-half me-2"></i>
         Subjects
       </a>
+      <a href="/group1/archive" class="text-decoration-none <?= ($_SESSION['page'] == 'archive') ? 'bg-navy text-white' : 'bg-white text-navy' ?> pe-2 ps-4 py-2 w-100 rounded-3">
+        <i class="bi bi-archive-fill me-2"></i>
+        Archive
+      </a>
     </div>
   </div>
   <!-- (~) Bottom Part / Logout -->

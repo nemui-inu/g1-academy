@@ -72,6 +72,7 @@ class Model
       }
 
       $stmt->bindValue(':id', $id);
+      $stmt->execute();
 
       return self::find($id);
     } catch (PDOException $e) {

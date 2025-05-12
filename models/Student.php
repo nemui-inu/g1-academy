@@ -38,6 +38,20 @@ class Student extends Model
     return $result ? new self($result) : null;
   }
 
+  public static function findByStudentId(string $studentId)
+  {
+    try {
+      $sql = 'select * from students where student_id = ?;';
+      $stmt = self::$conn->prepare($sql);
+      $stmt->execute([$studentId]);
+      $result = $stmt->fetchAll();
+
+      return count($result) > 0 ? $result[0] : false;
+    } catch (Exception $e) {
+      echo '(!) Error preparing statement: ' . $e->getMessage();
+    }
+  }
+
   public static function create($data)
   {
     $result = parent::create($data);
@@ -69,7 +83,7 @@ class Student extends Model
       'birthdate' => $this->birthdate,
       'course_id' => $this->course_id,
       'year_level' => $this->year_level,
-      'status' => $this->gender,
+      'status' => $this->status,
     ];
     $this->update($data);
   }

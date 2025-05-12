@@ -1,8 +1,10 @@
 let gridApi;
 
+// (~) Active Students
+
 document.addEventListener("DOMContentLoaded", function () {
-  const gridDiv = document.querySelector('#studentTable');
-  fetch('group1/studenttable').then(response => {
+  const gridDiv = document.querySelector('#activeStudents');
+  fetch('group1/active_students').then(response => {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -44,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }).catch(error => console.error('Error fetching row data: ', error));
 });   
 
-function onSearchBarInput() {
+function searchActiveStudentTable() {
   const searchValue = document.getElementById('searchBar').value;
   gridApi.setGridOption(
     "quickFilterText",
@@ -61,5 +63,5 @@ function editStudent(studentId) {
 }
 
 function deactivateStudent(studentId) {
-  alert(`Deactivate student with ID: ${studentId}`);
+  window.location.href = `/group1/students-deactivatestudent?id=${studentId}`;
 }

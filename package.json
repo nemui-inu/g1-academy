@@ -13,6 +13,7 @@
     "ag-grid-community": "^33.2.4",
     "bootstrap": "^5.3.5",
     "bootstrap-icons": "^1.11.3",
-    "chart.js": "^4.4.9"
+    "chart.js": "^4.4.9",
+    "toastr": "^2.1.4"
   }
 }

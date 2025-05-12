@@ -19,6 +19,7 @@ if (!isset($_SESSION['user']) && $path !== '/group1/login') {
   <title>G1 Academy</title>
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="node_modules/toastr/build/toastr.min.css">
   <link rel="stylesheet" href="public/css/main.min.css">
   <script src="node_modules/ag-grid-community/dist/ag-grid-community.min.js"></script>
 </head>

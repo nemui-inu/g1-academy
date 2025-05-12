@@ -28,7 +28,7 @@ class DashboardController extends Controller
   public static function getStudentCount(): int
   {
     $db = self::getConnection();
-    $stmt = $db->prepare('SELECT COUNT(*) FROM students;');
+    $stmt = $db->prepare("SELECT COUNT(*) FROM students where status='active';");
     $stmt->execute();
     return (int) $stmt->fetchColumn();
   }
@@ -36,7 +36,7 @@ class DashboardController extends Controller
   public static function getStudentByYear(): array
   {
     $db = self::getConnection();
-    $stmt = $db->prepare('SELECT year_level, COUNT(*) as count FROM students GROUP BY year_level ORDER BY year_level ASC;');
+    $stmt = $db->prepare("SELECT year_level, COUNT(*) as count FROM students where status='active' GROUP BY year_level ORDER BY year_level ASC;");
     $stmt->execute();
     return $stmt->fetchAll();
   }

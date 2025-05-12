@@ -24,6 +24,7 @@ class StudentController extends Controller
       'Students' => '/group1/students',
       'Overview' => '/group1/students',
     ];
+
     require_once 'layout/header.php';
     require_once 'layout/components/frame_head.php';
     require_once 'views/students/index.html';
@@ -45,24 +46,42 @@ class StudentController extends Controller
     include 'layout/footer.php';
   }
 
+  public static function getLastId(): array
+  {
+    self::setStudentConnection();
+
+    $result = Student::all();
+    $lastId = (int) $result[count($result) - 1]->id;
+    $currentId = $lastId + 1;
+
+    $studentId = 'STU';
+
+    if (++$lastId < 10) {
+      $studentId .= '000';
+    } else if ($currentId > 9 && $currentId < 100) {
+    } else if ($currenttId > 99 && $currentId < 1000) {
+      $studentId .= '00';
+    }
+
+    $studentId .= (string) $currentId;
+
+    $last_ids = [
+      'id' => $currentId,
+      'student_id' => $studentId,
+    ];
+
+    return $last_ids;
+  }
+
   public static function add(): void
   {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       self::setStudentConnection();
 
-      $result = Student::all();
-      $lastId = (int) $result[count($result) - 1]->id;
+      $ids = self::getLastId();
 
-      $studentId = 'STU';
-
-      if (++$lastId < 10) {
-        $studentId .= '000';
-      } else if (++$lastId > 9 && ++$lastId < 100) {
-      } else if (++$lastId > 99 && ++$lastId < 1000) {
-        $studentId .= '00';
-      }
-
-      $studentId .= (string) ++$lastId;
+      $id = $ids['id'];
+      $studentId = $ids['student_id'];
 
       $data = [
         'student_id' => $studentId,
@@ -85,7 +104,7 @@ class StudentController extends Controller
     return $db->getConnection();
   }
 
-  public static function fetchAll(): array
+  public static function fetchStudents(string $status): array
   {
     self::setStudentConnection();
 
@@ -93,7 +112,7 @@ class StudentController extends Controller
     $students = [];
 
     foreach ($results as $result) {
-      if ($result->status == 'inactive') {
+      if (strtolower($result->status) != $status) {
         continue;
       }
 
@@ -137,5 +156,25 @@ class StudentController extends Controller
     }, $students);
 
     return $rowData;
+  }
+
+  public static function deactivateStudent(): void
+  {
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+      $id = $_GET['id'];
+      unset($_GET['id']);
+
+      self::setStudentConnection();
+
+      (array) $data = array('status' => 'inactive');
+
+      $student = new Student(Student::findByStudentId($id));
+      $student->update($data);
+      $student->save();
+
+      header('Location: /group1/students');
+    } else {
+      echo 'Invalid request.';
+    }
   }
 }

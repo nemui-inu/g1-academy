@@ -1,3 +1,10 @@
+<?php
+$ids = self::getLastId();
+
+$id = $ids['id'];
+$studentId = $ids['student_id'];
+?>
+
 <div class="d-flex flex-column gap-3">
   <p class="mb-0 text-navy fw-bold" style="font-size: 20px;">New Student</p>
   <div class="text-navy container-fluid p-0 m-0 p-3 bg-white rounded-3 d-flex flex-column gap-0 justify-content-center shadow-sm">
@@ -13,11 +20,11 @@
         </div>
         <div class="col-3">
           <label for="studentID" class="form-label">ID<span class="text-black p-1 rounded-3 fst-italic fw-semibold ms-2 opacity-25">automatic</span></label>
-          <input type="text" id="studentID" name="id" placeholder="-" class="form-control roboto-mono-regular fw-bold" style="font-size: 14px;" disabled />
+          <input type="text" id="studentID" name="id" value="<?= $id ?>" class="form-control roboto-mono-regular" style="font-size: 14px;" disabled />
         </div>
         <div class="col-3">
           <label for="studentStudentID" class="form-label">Student ID<span class="text-black p-1 rounded-3 fst-italic fw-semibold ms-2 opacity-25">automatic</span></label>
-          <input type="text" id="studentStudentID" name="studentID" placeholder="-" class="form-control roboto-mono-regular fw-bold" style="font-size: 14px;" disabled />
+          <input type="text" id="studentStudentID" name="studentID" value="<?= $studentId ?>" class="form-control roboto-mono-regular" style="font-size: 14px;" disabled />
         </div>
       </div>
       <div class="row">
