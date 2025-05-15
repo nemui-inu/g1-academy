@@ -21,7 +21,7 @@ class InstructorController extends Controller
     require_once 'layout/components/frame_head.php';
     require_once self::$pageDir;
     require_once 'layout/components/frame_foot.php';
-    echo '<script src="public/js/subjectsOffered.js"></script>';
+    echo '<script src="public/js/instructorsData.js"></script>';
     require_once 'layout/footer.php';
   }
 
@@ -37,10 +37,49 @@ class InstructorController extends Controller
   {
     self::setUserConnection();
 
-    $result = User::all();
+    $results = User::all();
 
-    $rowData = [];
+    $rowData = array_map(function ($result) {
+      return [
+        'id' => $result->user_id,
+        'name' => $result->name,
+        'email' => $result->email,
+        'role' => $result->role,
+      ];
+    }, $results);
 
     return $rowData;
+  }
+
+  public static function create(): void
+  {
+    $_SESSION['page'] = 'instructors';
+    $_SESSION['path'] = [
+      'Instructors' => '/group1/instructors',
+      'Create' => '/group1/instrucors-create',
+    ];
+    include 'layout/header.php';
+    require_once 'layout/components/frame_head.php';
+    include 'views/instructors/create.php';
+    require_once 'layout/components/frame_foot.php';
+    include 'layout/footer.php';
+  }
+
+  public static function add(): void
+  {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      self::setUserConnection();
+
+      $data = [
+        'name' => $_POST['first_name'] . ' ' . $_POST['last_name'],
+        'email' => $_POST['email'],
+        'password' => password_hash($_POST['password'], PASSWORD_BCRYPT),
+        'role' => $_POST['role'],
+        'status' => $_POST['status'],
+      ];
+
+      User::create($data);
+      header('Location: /group1/instructors');
+    }
   }
 }

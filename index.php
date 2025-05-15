@@ -59,11 +59,17 @@ Router::add('/courses-view', fn() => CourseController::view());
 // (~) Instructor Page Routes
 Router::add('/instructors', fn() => InstructorController::index());
 
+Router::add('/instructors-create', fn() => InstructorController::create());
+Router::add('/instructors-addinstructor', fn() => InstructorController::add());
+
 // (~) Ajax Routes
 Router::add('/active_students', fn() => Ajax::activeStudents());
 Router::add('/inactive_students', fn() => Ajax::inactiveStudents());
+
 Router::add('/courses_offered', fn() => Ajax::coursesOffered());
 Router::add('/enrolled_students', fn() => Ajax::enrolledStudents());
+
+Router::add('/instructors_table', fn() => Ajax::activeInstructors());
 
 Router::add('/archive', fn() => ArchiveController::index());
 Router::add('/archive_restore_student', fn() => ArchiveController::restoreStudent());

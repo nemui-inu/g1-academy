@@ -1,7 +1,7 @@
 <div class="d-flex flex-column gap-5">
   <!-- (~) Active Students Table -->
   <div class="d-flex flex-column gap-3">
-    <p class="mb-0 text-navy fw-bold" style="font-size: 20px;">Subjects Offered</p>
+    <p class="mb-0 text-navy fw-bold" style="font-size: 20px;">Active Instructors</p>
     <div class="d-flex flex-row gap-3">
       <div class="container-fluid p-0 m-0 p-3 bg-white rounded-3 d-flex flex-column gap-0 justify-content-center shadow-sm">
         <!-- (~) Table Utilities -->
@@ -14,14 +14,14 @@
               <i class="bi bi-file-earmark-pdf me-2"></i>
               <span>Export</span>
             </button>
-            <a href="subjects-create" class="btn btn-sm btn-success px-3">
+            <a href="instructors-create" class="btn btn-sm btn-success px-3">
               <i class="bi bi-plus-square me-2"></i>
               <span>Create</span>
             </a>
           </div>
         </div>
         <!-- (~) Table -->
-        <div id="subjectsOffered" class="" ></div>
+        <div id="instructorsTable" class="" ></div>
       </div>
     </div>
   </div>

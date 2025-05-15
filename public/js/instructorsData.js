@@ -3,7 +3,7 @@ let instructorTable;
 // (~) Active Students
 
 document.addEventListener("DOMContentLoaded", function () {
-  const gridDiv = document.querySelector('#subjectsOffered');
+  const gridDiv = document.querySelector('#instructorsTable');
   fetch('group1/instructors_table').then(response => {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }).then(data => {
     const gridOptions = {
       defaultColDef: {
-        flex: 1,
+        flex: 2,
         headerClass: 'fw-bold roboto-regular',
         cellClass: 'roboto-regular',
         filter: true,
@@ -20,10 +20,10 @@ document.addEventListener("DOMContentLoaded", function () {
       domLayout: 'autoHeight',
       rowData: data,
       columnDefs: [
-        { field: 'id', hide: true, },
-        { field: 'code', headerName: 'Course Code', flex: 1},
-        { field: 'name', headerName: 'Course Name', cellClass: 'fw-semibold', flex: 3},
-        { field: 'enrolled', headerName: 'Enrolled', cellClass: 'roboto-mono-regular'},
+        { field: 'id', headerName: 'User ID', flex: 1},
+        { field: 'name', cellClass: 'fw-semibold'},
+        { field: 'email'},
+        { field: 'role', flex: 1},
         {
           headerName: 'Actions',
           field: 'actions',
