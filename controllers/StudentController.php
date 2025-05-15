@@ -159,7 +159,7 @@ class StudentController extends Controller
       $studentId .= '000';
     } else if ($currentId > 9 && $currentId < 100) {
       $studentId .= '00';
-    } else if ($currenttId > 99 && $currentId < 1000) {
+    } else if ($currentId > 99 && $currentId < 1000) {
       $studentId .= '0';
     }
 

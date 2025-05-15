@@ -125,7 +125,6 @@ foreach ($studentsByYear as $key => $value) {
           </div>
         </div>
       </div>
-
     </div>
 
     <!-- Courses & Subjects Row -->

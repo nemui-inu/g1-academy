@@ -81,7 +81,17 @@
         }
 
         public function getAllSubjects() {
-            $query = "SELECT code, name FROM subjects ORDER BY name ASC";
+            $query = "
+                SELECT 
+                    s.code, 
+                    s.name, 
+                    COUNT(se.student_id) AS student_count
+                FROM subjects s
+                LEFT JOIN subject_enrollments se 
+                    ON s.id = se.subject_id AND se.status = 'enrolled'
+                GROUP BY s.id
+                ORDER BY s.name ASC
+            ";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -124,10 +134,13 @@
                     s.name, 
                     s.year_level, 
                     g.grade, 
-                    g.remarks 
+                    g.remarks, 
+                    subj.code AS subject_code
                 FROM grades g
                 JOIN students s ON g.student_id = s.id
-                WHERE g.instructor_id = :instructor_id AND (g.remarks = 'Pending' OR g.grade IS NULL)
+                JOIN subjects subj ON g.subject_id = subj.id
+                WHERE g.instructor_id = :instructor_id 
+                AND (g.remarks = 'Passed' OR g.grade IS NULL)
                 ORDER BY s.name ASC
             ";
             $stmt = $this->conn->prepare($query);
@@ -146,5 +159,28 @@
             return $stmt->fetchColumn();
         }
 
+        public function getInstructorSchedules($instructor_id) {
+            $query = "
+                SELECT 
+                    s.day,
+                    s.time,
+                    s.room,
+                    s.name AS subject_name,
+                    s.code AS subject_code,
+                    c.name AS course_name,
+                    s.year_level,
+                    s.semester
+                FROM subjects s
+                JOIN courses c ON s.course_id = c.course_id
+                WHERE s.instructor_id = :instructor_id
+                ORDER BY 
+                    FIELD(s.day, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'),
+                    s.time
+            ";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':instructor_id', $instructor_id, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
     }
 ?>
