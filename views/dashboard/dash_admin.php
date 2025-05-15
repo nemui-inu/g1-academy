@@ -6,7 +6,7 @@ $totals = [
   'Admins' => DashboardController::getUserCount('admin'),
   'Instructors' => DashboardController::getUserCount('instructor'),
   'Students' => DashboardController::getStudentCount(),
-  'Courses' => 0,
+  'Courses' => DashboardController::getCourseCount(),
   'Subjects' => 0
 ];
 

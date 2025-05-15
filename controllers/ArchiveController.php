@@ -19,6 +19,7 @@ class ArchiveController extends Controller
     require_once 'layout/components/frame_head.php';
     require_once self::$pageDir;
     require_once 'layout/components/frame_foot.php';
+    echo '<script src="public/js/inactiveStudent.js"></script>';
     require_once 'layout/footer.php';
   }
 

@@ -2,9 +2,11 @@ let gridApi;
 
 // (~) Active Students
 
+console.log('hello');
+
 document.addEventListener("DOMContentLoaded", function () {
-  const gridDiv = document.querySelector('#activeStudents');
-  fetch('group1/active_students').then(response => {
+  const gridDiv = document.querySelector('#studentEnrolled');
+  fetch('group1/enrolled_students').then(response => {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -23,8 +25,6 @@ document.addEventListener("DOMContentLoaded", function () {
         { field: 'studentID'},
         { field: 'name', cellClass: 'fw-semibold'},
         { field: 'gender', cellClass: 'text-capitalize'},
-        { field: 'birthdate'},
-        { field: 'course'},
         { field: 'yearLevel'},
         {
           headerName: 'Actions',

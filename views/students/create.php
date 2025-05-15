@@ -3,6 +3,9 @@ $ids = self::getLastId();
 
 $id = $ids['id'];
 $studentId = $ids['student_id'];
+
+$courses = CourseController::getCourses();
+
 ?>
 
 <div class="d-flex flex-column gap-3">
@@ -20,11 +23,11 @@ $studentId = $ids['student_id'];
         </div>
         <div class="col-3">
           <label for="studentID" class="form-label">ID<span class="text-black p-1 rounded-3 fst-italic fw-semibold ms-2 opacity-25">automatic</span></label>
-          <input type="text" id="studentID" name="id" value="<?= $id ?>" class="form-control roboto-mono-regular" style="font-size: 14px;" disabled />
+          <input type="text" id="studentID" name="id" value="<?= $id ?>" class="form-control roboto-mono-regular" style="font-size: 14px;" readonly />
         </div>
         <div class="col-3">
           <label for="studentStudentID" class="form-label">Student ID<span class="text-black p-1 rounded-3 fst-italic fw-semibold ms-2 opacity-25">automatic</span></label>
-          <input type="text" id="studentStudentID" name="studentID" value="<?= $studentId ?>" class="form-control roboto-mono-regular" style="font-size: 14px;" disabled />
+          <input type="text" id="studentStudentID" name="studentID" value="<?= $studentId ?>" class="form-control roboto-mono-regular" style="font-size: 14px;" readonly />
         </div>
       </div>
       <div class="row">
@@ -54,8 +57,9 @@ $studentId = $ids['student_id'];
           <label for="studentCourse" class="form-label">Course<span class="text-black p-1 rounded-3 fst-italic fw-semibold ms-2 opacity-25">required</span></label>
           <select name="course" id="studentCourse" class="form-select" style="font-size: 14px;">
             <option selected>-- Select --</option>
-            <option value="1">BSIT</option>
-            <option value="2">BSCS</option>
+            <?php foreach ($courses as $course): ?>
+            <option value="<?= $course['id'] ?>"><?= $course['code'] ?></option>
+            <?php endforeach ?>
           </select>
         </div>
       </div>
@@ -63,8 +67,8 @@ $studentId = $ids['student_id'];
         <div class="col-3">
           <label for="studentStatus" class="form-label">Status<span class="text-black p-1 rounded-3 fst-italic fw-semibold ms-2 opacity-25">required</span></label>
           <select name="status" id="studentStatus" class="form-select" style="font-size: 14px;">
-            <option selected>-- Select --</option>
-            <option value="Active">Active</option>
+            <option>-- Select --</option>
+            <option value="Active" selected>Active</option>
             <option value="Inactive">Inactive</option>
           </select>
         </div>

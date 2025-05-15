@@ -1,8 +1,10 @@
 <?php declare(strict_types=1);
 
 require_once 'controllers/Controller.php';
+require_once 'controllers/StudentController.php';
 require_once 'models/User.php';
 require_once 'models/Student.php';
+require_once 'models/Course.php';
 require_once 'models/Database.php';
 
 class DashboardController extends Controller
@@ -27,10 +29,14 @@ class DashboardController extends Controller
 
   public static function getStudentCount(): int
   {
-    $db = self::getConnection();
-    $stmt = $db->prepare("SELECT COUNT(*) FROM students where status='active';");
-    $stmt->execute();
-    return (int) $stmt->fetchColumn();
+    $result = StudentController::fetchStudents('active');
+    return count($result);
+  }
+
+  public static function getCourseCount(): int
+  {
+    $result = Course::all();
+    return count($result);
   }
 
   public static function getStudentByYear(): array

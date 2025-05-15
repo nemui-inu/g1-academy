@@ -12,11 +12,11 @@
         <i class="bi bi-bar-chart-fill me-2"></i>
         Dashboard
       </a>
-      <a href="/group1/dashboard" class="text-decoration-none <?= ($_SESSION['page'] == 'admins') ? 'bg-navy text-white' : 'bg-white text-navy' ?> pe-2 ps-4 py-2 w-100 rounded-3">
+      <a href="/group1/admins" class="text-decoration-none <?= ($_SESSION['page'] == 'admins') ? 'bg-navy text-white' : 'bg-white text-navy' ?> pe-2 ps-4 py-2 w-100 rounded-3">
         <i class="bi bi-diagram-3-fill me-2"></i>
         Admins
       </a>
-      <a href="/group1/dashboard" class="text-decoration-none <?= ($_SESSION['page'] == 'instructors') ? 'bg-navy text-white' : 'bg-white text-navy' ?> pe-2 ps-4 py-2 w-100 rounded-3">
+      <a href="/group1/instructors" class="text-decoration-none <?= ($_SESSION['page'] == 'instructors') ? 'bg-navy text-white' : 'bg-white text-navy' ?> pe-2 ps-4 py-2 w-100 rounded-3">
         <i class="bi bi-person-workspace me-2"></i>
         Instructors
       </a>
@@ -24,11 +24,11 @@
         <i class="bi bi-mortarboard-fill me-2"></i>
         Students
       </a>
-      <a href="/group1/dashboard" class="text-decoration-none <?= ($_SESSION['page'] == 'courses') ? 'bg-navy text-white' : 'bg-white text-navy' ?> pe-2 ps-4 py-2 w-100 rounded-3">
+      <a href="/group1/courses" class="text-decoration-none <?= ($_SESSION['page'] == 'courses') ? 'bg-navy text-white' : 'bg-white text-navy' ?> pe-2 ps-4 py-2 w-100 rounded-3">
         <i class="bi bi-collection-fill me-2"></i>
         Courses
       </a>
-      <a href="/group1/dashboard" class="text-decoration-none <?= ($_SESSION['page'] == 'subjects') ? 'bg-navy text-white' : 'bg-white text-navy' ?> pe-2 ps-4 py-2 w-100 rounded-3">
+      <a href="/group1/subjects" class="text-decoration-none <?= ($_SESSION['page'] == 'subjects') ? 'bg-navy text-white' : 'bg-white text-navy' ?> pe-2 ps-4 py-2 w-100 rounded-3">
         <i class="bi bi-book-half me-2"></i>
         Subjects
       </a>

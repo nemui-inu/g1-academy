@@ -29,7 +29,31 @@ class StudentController extends Controller
     require_once 'layout/components/frame_head.php';
     require_once 'views/students/index.html';
     require_once 'layout/components/frame_foot.php';
+    echo '<script src="public/js/activeStudent.js"></script>';
     require_once 'layout/footer.php';
+  }
+
+  public static function view(): void
+  {
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+      self::setStudentConnection();
+
+      $_SESSION['view_user'] = Student::findByStudentId($_GET['id']);
+
+      $_SESSION['page'] = 'students';
+      $_SESSION['path'] = [
+        'Students' => '/group1/students',
+        $_SESSION['view_user']['name'] => '/group1/students-view',
+      ];
+
+      include 'layout/header.php';
+      require_once 'layout/components/frame_head.php';
+      include 'views/students/view.php';
+      require_once 'layout/components/frame_foot.php';
+      include 'layout/footer.php';
+    } else {
+      echo 'Invalid Request.';
+    }
   }
 
   public static function create(): void
@@ -46,21 +70,97 @@ class StudentController extends Controller
     include 'layout/footer.php';
   }
 
+  public static function edit(): void
+  {
+    $_SESSION['page'] = 'students';
+    $_SESSION['path'] = [
+      'Students' => '/group1/students',
+      'Edit' => '/group1/students-edit',
+    ];
+
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+      self::setStudentConnection();
+
+      $_SESSION['edit_user'] = Student::findByStudentId($_GET['id']);
+
+      include 'layout/header.php';
+      require_once 'layout/components/frame_head.php';
+      include 'views/students/edit.php';
+      require_once 'layout/components/frame_foot.php';
+      include 'layout/footer.php';
+    } else {
+      echo 'Invalid Request.';
+    }
+  }
+
+  public static function getYearLevel(int $year): string
+  {
+    $yearLevel = '';
+    switch ($year) {
+      case 1:
+        $yearLevel = 'First Year';
+        break;
+      case 2:
+        $yearLevel = 'Second Year';
+        break;
+      case 3:
+        $yearLevel = 'Third Year';
+        break;
+      case 4:
+        $yearLevel = 'Fourth Year';
+        break;
+      default:
+        $yearLevel = 'Unenrolled';
+        break;
+    }
+    return $yearLevel;
+  }
+
+  public static function editStudent(): void
+  {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      self::setStudentConnection();
+
+      $data = [
+        'name' => $_POST['firstName'] . ' ' . $_POST['lastName'],
+        'gender' => $_POST['gender'],
+        'birthdate' => $_POST['birthdate'],
+        'course_id' => $_POST['course'],
+        'year_level' => $_POST['yearLevel'],
+        'status' => $_POST['status'],
+      ];
+
+      $student = Student::find($_POST['id']);
+      $student->update($data);
+      $student->save();
+
+      header('Location: /group1/students');
+    } else {
+      echo 'Invalid Request.';
+    }
+  }
+
   public static function getLastId(): array
   {
     self::setStudentConnection();
 
-    $result = Student::all();
+    if (!$result = Student::all()) {
+      return $ids = [
+        'id' => '1',
+        'student_id' => 'GS-0001',
+      ];
+    }
     $lastId = (int) $result[count($result) - 1]->id;
     $currentId = $lastId + 1;
 
-    $studentId = 'STU';
+    $studentId = 'GS-';
 
     if (++$lastId < 10) {
       $studentId .= '000';
     } else if ($currentId > 9 && $currentId < 100) {
-    } else if ($currenttId > 99 && $currentId < 1000) {
       $studentId .= '00';
+    } else if ($currenttId > 99 && $currentId < 1000) {
+      $studentId .= '0';
     }
 
     $studentId .= (string) $currentId;
@@ -102,6 +202,24 @@ class StudentController extends Controller
   {
     $db = new Database();
     return $db->getConnection();
+  }
+
+  public static function fetchByCourseId(): array
+  {
+    $students = self::fetchStudents('active');
+
+    $courseCode = $_SESSION['enrolled_table'];
+    unset($_SESSION['enrolled_table']);
+
+    $rowData = [];
+
+    foreach ($students as $student) {
+      if ($student['course'] == $courseCode) {
+        $rowData[] = $student;
+      }
+    }
+
+    return $rowData;
   }
 
   public static function fetchStudents(string $status): array
