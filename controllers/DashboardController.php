@@ -6,6 +6,8 @@ require_once 'models/User.php';
 require_once 'models/Student.php';
 require_once 'models/Course.php';
 require_once 'models/Database.php';
+require_once 'models/Dashboard.php';
+
 
 class DashboardController extends Controller
 {
@@ -55,4 +57,12 @@ class DashboardController extends Controller
     $stmt->execute();
     return (int) $stmt->fetchColumn();
   }
+
+  public static function getSubjectCount(): int
+  {
+    $db = self::getConnection();
+    $dashboard = new Dashboard($db);
+    return (int) $dashboard->getTotal('subjects');
+  }
+
 }
