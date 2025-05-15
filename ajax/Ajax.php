@@ -2,6 +2,7 @@
 
 require_once 'controllers/StudentController.php';
 require_once 'controllers/CourseController.php';
+require_once 'controllers/InstructorController.php';
 
 class Ajax
 {
@@ -36,6 +37,15 @@ class Ajax
   {
     ob_start();
     $rowData = StudentController::fetchByCourseId();
+    header('Content-Type: application/json');
+    echo json_encode($rowData);
+    ob_end_flush();
+  }
+
+  public static function activeInstructors(): void
+  {
+    ob_start();
+    $rowData = InstructorController::fetchInstructors();
     header('Content-Type: application/json');
     echo json_encode($rowData);
     ob_end_flush();
