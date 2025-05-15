@@ -29,13 +29,14 @@ class LoginController extends Controller
 
     $user = User::findByEmail($email);
 
-    if ($user && password_verify($password, $user['password'])) {
+    if ($user && isset($user['password']) && $password === $user['password']) {
       $_SESSION['user'] = $user;
       header('Location: /group1/dashboard');
       exit;
     } else {
-      $_SESSION['error'] = 'Invalid email or password';
+      $_SESSION['error'] = 'Invalid email or password.';
       header('Location: /group1/login');
+      exit;
     }
   }
 
