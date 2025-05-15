@@ -26,16 +26,30 @@ class Student extends Model
     }
   }
 
-  public static function all()
+  public static function all(): ?array
   {
     $result = parent::all();
-    return $result ? array_map(fn($data) => new self($data), $result) : null;
+    return $result ? (array) array_map(fn($data) => new self($data), $result) : null;
   }
 
   public static function find($id)
   {
     $result = parent::find($id);
     return $result ? new self($result) : null;
+  }
+
+  public static function findByStudentId(string $studentId)
+  {
+    try {
+      $sql = 'select * from students where student_id = ?;';
+      $stmt = self::$conn->prepare($sql);
+      $stmt->execute([$studentId]);
+      $result = $stmt->fetchAll();
+
+      return count($result) > 0 ? $result[0] : false;
+    } catch (Exception $e) {
+      echo '(!) Error preparing statement: ' . $e->getMessage();
+    }
   }
 
   public static function create($data)
@@ -69,7 +83,7 @@ class Student extends Model
       'birthdate' => $this->birthdate,
       'course_id' => $this->course_id,
       'year_level' => $this->year_level,
-      'status' => $this->gender,
+      'status' => $this->status,
     ];
     $this->update($data);
   }
