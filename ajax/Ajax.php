@@ -3,6 +3,7 @@
 require_once 'controllers/StudentController.php';
 require_once 'controllers/CourseController.php';
 require_once 'controllers/InstructorController.php';
+require_once 'controllers/DashboardController.php';
 
 class Ajax
 {
@@ -46,6 +47,16 @@ class Ajax
   {
     ob_start();
     $rowData = InstructorController::fetchInstructors();
+    header('Content-Type: application/json');
+    echo json_encode($rowData);
+    ob_end_flush();
+  }
+
+  public static function pendingGradingDetails(): void
+  { 
+    ob_start();
+    $instructor_id = $_SESSION['user']['user_id'];
+    $rowData = DashboardController::getPendingGradingDetails((int)$instructor_id);
     header('Content-Type: application/json');
     echo json_encode($rowData);
     ob_end_flush();

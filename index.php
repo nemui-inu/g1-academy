@@ -74,4 +74,6 @@ Router::add('/instructors_table', fn() => Ajax::activeInstructors());
 Router::add('/archive', fn() => ArchiveController::index());
 Router::add('/archive_restore_student', fn() => ArchiveController::restoreStudent());
 
+Router::add('/pending_grading_details', fn() => Ajax::pendingGradingDetails());
+
 Router::dispatch($path);

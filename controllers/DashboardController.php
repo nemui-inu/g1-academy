@@ -65,4 +65,10 @@ class DashboardController extends Controller
     return (int) $dashboard->getTotal('subjects');
   }
 
+  public static function getPendingGradingDetails($instructor_id): array
+  {
+    $db = self::getConnection();
+    $dashboard = new Dashboard($db);
+    return $dashboard->getPendingGradingDetails($instructor_id);
+  }
 }

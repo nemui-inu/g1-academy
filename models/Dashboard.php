@@ -51,7 +51,6 @@
                 4 => '4th Year'
             ];
 
-            // Initialize all year levels to 0 for each course
             foreach ($result as $row) {
                 $course = $row['course_name'];
                 if (!isset($students_per_year_level[$course])) {
@@ -133,14 +132,16 @@
                     s.student_id, 
                     s.name, 
                     s.year_level, 
+                    c.code AS course_code,
                     g.grade, 
                     g.remarks, 
                     subj.code AS subject_code
                 FROM grades g
                 JOIN students s ON g.student_id = s.id
                 JOIN subjects subj ON g.subject_id = subj.id
+                JOIN courses c ON s.course_id = c.course_id
                 WHERE g.instructor_id = :instructor_id 
-                AND (g.remarks = 'Passed' OR g.grade IS NULL)
+                AND (g.remarks = 'Pending' OR g.grade IS NULL)
                 ORDER BY s.name ASC
             ";
             $stmt = $this->conn->prepare($query);

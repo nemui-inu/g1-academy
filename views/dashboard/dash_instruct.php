@@ -60,44 +60,19 @@
         <!-- Pending Grading Tasks -->
         <p class="mb-2 fw-bold text-navy" style="font-size: 24px;">Pending Grading Tasks</p>
         <div class="bg-white rounded-4 shadow-sm p-4 mb-4">
-            <?php
-            $pendingGradingDetails = $dashboard->getPendingGradingDetails($instructor_id);
-
-            if (!empty($pendingGradingDetails)) {
-                echo '
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped align-middle">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Student ID</th>
-                                <th>Name</th>
-                                <th>Year Level</th>
-                                <th>Subject</th>
-                                <th>Grade</th>
-                                <th>Remarks</th>
-                            </tr>
-                        </thead>
-                        <tbody>';
-                foreach ($pendingGradingDetails as $row) {
-                    echo '<tr>
-                        <td>' . htmlspecialchars($row['student_id']) . '</td>
-                        <td>' . htmlspecialchars($row['name']) . '</td>
-                        <td>' . htmlspecialchars($row['year_level']) . '</td>
-                        <td>' . htmlspecialchars($row['subject_code']) . '</td>
-                        <td>' . ($row['grade'] !== null ? htmlspecialchars($row['grade']) : '<span class="text-muted">N/A</span>') . '</td>
-                        <td>' . htmlspecialchars($row['remarks']) . '</td>
-                    </tr>';
-                }
-                echo '</tbody></table></div>';
-            } else {
-                echo '<p class="text-muted mb-0">No pending grading tasks.</p>';
-            }
-            ?>
+            <div id="pending-grading-message" class="text-muted mb-2"></div>
+            <div id="pendingGradingGrid" class="ag-theme-alpine" data-instructor-id="<?= htmlspecialchars($instructor_id) ?>"></div>
         </div>
     </div>
 </div>
 
 <!--Script-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-grid.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-alpine.css" />
+<script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
+
+<script src="public/js/pendingGradingDetails.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     const scheduleData = <?php echo json_encode($schedule); ?>;
