@@ -79,4 +79,7 @@ Router::add('/grades/show', fn() => (new GradesController())->show());
 Router::add('/grades/update', fn() => (new GradesController())->update());
 
 
-Router::dispatch($path);
+if (!Router::dispatch($path)) {
+  include 'views/error/404.php';
+}
+
