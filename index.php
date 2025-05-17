@@ -7,7 +7,7 @@ require_once 'controllers/DashboardController.php';
 require_once 'controllers/StudentController.php';
 require_once 'controllers/CourseController.php';
 require_once 'controllers/InstructorController.php';
-
+require_once 'controllers/GradesController.php';
 require_once 'controllers/ArchiveController.php';
 
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -73,5 +73,10 @@ Router::add('/instructors_table', fn() => Ajax::activeInstructors());
 
 Router::add('/archive', fn() => ArchiveController::index());
 Router::add('/archive_restore_student', fn() => ArchiveController::restoreStudent());
+
+Router::add('/grades', fn() => (new GradesController())->index());
+Router::add('/grades/show', fn() => (new GradesController())->show());
+Router::add('/grades/update', fn() => (new GradesController())->update());
+
 
 Router::dispatch($path);
