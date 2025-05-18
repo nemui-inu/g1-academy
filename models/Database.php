@@ -1,9 +1,9 @@
 <?php
 
 class Database {
-  private $host = 'localhost';
+  private $host = '127.0.0.1:3307';
   private $user = 'root';
-  private $password = 'root';
+  private $password = '';
   private $dbname = 'g1_academy';
   private $conn;
 
