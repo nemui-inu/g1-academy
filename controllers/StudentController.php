@@ -255,10 +255,13 @@ class StudentController extends Controller
       $students[] = $result;
     }
 
-    $courses = Course::getCourses();
+    $courses = Course::getAllCourses();
     $courseMap = [];
-    foreach ($courses as $course) {
-      $courseMap[$course['course_id']] = $course['code'];
+    foreach ($courses as $course) 
+    {
+      if (isset($course['course_id'], $course['code'])) {
+          $course_map[$course['course_id']] = $course['code'];
+      }
     }
     $yearLevels = [1 => '1st Year', 2 => '2nd Year', 3 => '3rd Year', 4 => '4th Year'];
 
@@ -286,7 +289,8 @@ class StudentController extends Controller
 
       (array) $data = array('status' => 'inactive');
 
-      $student = new Student(Student::findByStudentId($id));
+      $student = new Student;
+      $student = Student::findByStudentId($id);
       $student->update($data);
       $student->save();
 

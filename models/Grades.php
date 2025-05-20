@@ -1,6 +1,10 @@
 <?php
-
-require_once 'Model.php';
+    require_once 'Model.php';
+    require_once 'User.php';
+    require_once 'Course.php';
+    require_once 'Subject.php';
+    require_once 'Enrollment.php';
+    require_once 'Student.php';
 
 class Grades extends Model
 {
@@ -67,7 +71,20 @@ class Grades extends Model
       'grade' => $this->grade,
       'remarks' => $this->remarks,
     ];
-    $this->update($data);
+
+    if ($this->grade_id) {
+      return $this->update($data);
+    } else {
+      $newGrade = self::create($data);
+      if ($newGrade) {
+        foreach ($data as $key => $value) {
+          $this->$key = $value;
+        }
+        $this->grade_id = $newGrade->grade_id;
+        return true;
+      }
+      return false;
+    }
   }
 
   public function delete()
@@ -84,5 +101,32 @@ class Grades extends Model
     } else {
       return false;
     }
+  }
+
+  public static function getPendingGradingDetails($instructor_id)
+  {
+    $query = "SELECT * FROM grades WHERE instructor_id = :instructor_id AND (remarks = 'Passed' OR grade IS NULL) ORDER BY created_at DESC";
+    $stmt = static::$conn->prepare($query);
+    $stmt->bindParam(':instructor_id', $instructor_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $grades = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $details = [];
+    foreach ($grades as $grade) {
+      $student = Student::getStudentInfoById($grade['student_id']);
+      if (!$student) {
+        continue;
+      }
+      $details[] = [
+        'student_id'   => $grade['student_id'],
+        'name'         => $student['name'],
+        'year_level'   => $student['year_level'],
+        'course_code'  => Course::getCourseCode($student['course_id']),
+        'grade'        => $grade['grade'],
+        'remarks'      => $grade['remarks'],
+        'subject_code' => Subject::getSubjectCodeById($grade['subject_id']),
+      ];
+    }
+    return $details;
   }
 }

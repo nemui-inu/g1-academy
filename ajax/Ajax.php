@@ -56,7 +56,7 @@ class Ajax
   { 
     ob_start();
     $instructor_id = $_SESSION['user']['user_id'];
-    $rowData = DashboardController::getPendingGradingDetails((int)$instructor_id);
+    $rowData = DashboardController::getPendingGradingDetails($instructor_id);
     header('Content-Type: application/json');
     echo json_encode($rowData);
     ob_end_flush();

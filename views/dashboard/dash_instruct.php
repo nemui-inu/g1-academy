@@ -35,7 +35,7 @@
                             foreach ($subjects as $subject) {
                                 if ($count >= 4) break;
 
-                                $name = htmlspecialchars($subject['name']);
+                                $name = $subject['name'];
                                 $enrolled = (int) $subject['enrolled_students'];
 
                                 echo '
@@ -61,7 +61,7 @@
         <p class="mb-2 fw-bold text-navy" style="font-size: 24px;">Pending Grading Tasks</p>
         <div class="bg-white rounded-4 shadow-sm p-4 mb-4">
             <div id="pending-grading-message" class="text-muted mb-2"></div>
-            <div id="pendingGradingGrid" class="ag-theme-alpine" data-instructor-id="<?= htmlspecialchars($instructor_id) ?>"></div>
+            <div id="pendingGradingGrid" class="ag-theme-alpine" data-instructor-id="<?= $instructor_id ?>"></div>
         </div>
     </div>
 </div>
