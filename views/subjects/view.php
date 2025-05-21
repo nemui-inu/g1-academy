@@ -83,7 +83,7 @@ $room = $subject['room'];
           </div>
         </div>
         <!-- (~) Table -->
-        <div id="studentEnrolled" class=""></div>
+        <div id="enroTable" class=""></div>
       </div>
     </div>
   </div>

@@ -12,7 +12,7 @@
           </div>
         </div>
         <!-- (~) Table -->
-        <div id="inactiveStudents" class="" ></div>
+        <div id="studentsEnroll" class="" ></div>
         <!-- (~) GoBack Button -->
         <div class="d-flex flex-row align-items-center justify-content-end mt-3 gap-3">
           <a href="subjects-view?id=<?= $_GET['id'] ?>" class="btn btn-sm btn-outline-gray px-3">Go Back</a>
