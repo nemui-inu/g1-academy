@@ -1,16 +1,16 @@
 <?php
-  if (isset($_SESSION['user']) && isset($_SESSION['user']['role'])) {
-      $user_role = $_SESSION['user']['role'];
+if (isset($_SESSION['user']) && isset($_SESSION['user']['role'])) {
+  $user_role = $_SESSION['user']['role'];
 
-      if ($user_role === 'instructor' && strpos($_SERVER['REQUEST_URI'], '/students') !== false) {
-          echo "Access denied. Instructors are not authorized to view this section.";
-          exit();
-      }
+  if ($user_role === 'instructor' && strpos($_SERVER['REQUEST_URI'], '/students') !== false) {
+    echo 'Access denied. Instructors are not authorized to view this section.';
+    exit();
+  }
 
-      $database = new Database();
-      $conn = $database->getConnection();
+  $database = new Database();
+  $conn = $database->getConnection();
 
-      ?>
+  ?>
       <div class="d-flex flex-column gap-5">
         <!-- (~) Active Students Table -->
         <div class="d-flex flex-column gap-3">
@@ -20,7 +20,7 @@
               <!-- (~) Table Utilities -->
               <div class="d-flex flex-row align-items-center justify-content-between mb-3">
                 <!-- (~) Search Bar -->
-                <input type="text" id="searchBar" class="form-control w-25" style="font-size: 14px;" placeholder="Search students ..." oninput="searchActiveStudentTable()">
+                <input type="text" id="searchBarBar" class="form-control w-25" style="font-size: 14px;" placeholder="Search students ..." oninput="searchActiveStudentTable()">
                 <!-- (~) Buttons -->
                 <div class="d-flex flex-row gap-2 align-items-center justify-content-center">
                   <button class="btn btn-sm btn-gray px-3" onclick="exportToPDF()">
@@ -34,9 +34,9 @@
                 </div>
               </div>
               <!-- (~) Table -->
-              <div class="bg-white rounded-4 shadow-sm p-4 mb-4">
+              <div class="">
                   <div id="active-students-message" class="text-danger mt-2"></div>
-                  <div id="activeStudents" class="ag-theme-alpine" style="overflow-x: auto;"></div>
+                  <div id="activeStudents" class="" style="overflow-x: auto;"></div>
               </div>
             </div>
           </div>
@@ -44,12 +44,9 @@
       </div>
 
       <!--Script-->
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-grid.css" />
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-alpine.css" />
-      <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
       <script src="public/js/activeStudents.js"></script>
       <?php
-  } else {
-      header("Location: auth/login.php");
-      exit();
-  }
+} else {
+  header('Location: auth/login.php');
+  exit();
+}
