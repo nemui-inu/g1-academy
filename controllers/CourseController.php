@@ -66,9 +66,9 @@ class CourseController extends Controller
     CourseController::setCourseConnection();
 
     $courses = Course::find($_GET['id']);
-    $course_id = $courses->course_id;
-    $course_code = $courses->code;
-    $course_name = $courses->name;
+    $course_id = $courses['course_id'];
+    $course_code = $courses['code'];
+    $course_name = $courses['name'];
 
     $_SESSION['page'] = 'courses';
     $_SESSION['path'] = [
@@ -99,9 +99,8 @@ class CourseController extends Controller
         'name' => $_POST['name'],
       ];
 
-      $course = Course::find($course_id);
-      $course->update($course_id, $data);
-      $course->save();
+      $course = new Course(Course::find($course_id));
+      $course->update($data);
 
       header('Location: /group1/courses');
     } else {

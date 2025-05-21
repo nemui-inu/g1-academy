@@ -4,7 +4,7 @@ let instructorTable;
 
 document.addEventListener("DOMContentLoaded", function () {
   const gridDiv = document.querySelector('#instructorsTable');
-  fetch('group1/instructors_table').then(response => {
+  fetch('group1/active_admins').then(response => {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -46,20 +46,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function searchInstructorTable() {
   const searchValue = document.getElementById('searchInstructors').value;
-  coursesTable.setGridOption(
+  instructorTable.setGridOption(
     "quickFilterText",
     searchValue,
   );
 }
 
 function viewInstructor(id) {
-  window.location.href = `/group1/instructor-view?id=${id}`;
+  window.location.href = `/group1/admins-view?id=${id}`;
 }
 
 function editInstructor(id) {
-  window.location.href = `/group1/instructor-edit?id=${id}`;
+  window.location.href = `/group1/admins-edit?id=${id}`;
 }
 
 function deleteInstructor(id) {
-  window.location.href = `/group1/instructor-deactivate?id=${id}`;
+  window.location.href = `/group1/admins-deactivate?id=${id}`;
 }

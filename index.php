@@ -7,6 +7,7 @@ require_once 'controllers/DashboardController.php';
 require_once 'controllers/StudentController.php';
 require_once 'controllers/CourseController.php';
 require_once 'controllers/InstructorController.php';
+require_once 'controllers/AdminController.php';
 
 require_once 'controllers/ArchiveController.php';
 
@@ -62,6 +63,25 @@ Router::add('/instructors', fn() => InstructorController::index());
 Router::add('/instructors-create', fn() => InstructorController::create());
 Router::add('/instructors-addinstructor', fn() => InstructorController::add());
 
+Router::add('/instructor-view', fn() => InstructorController::view());
+
+Router::add('/instructor-edit', fn() => InstructorController::edit());
+Router::add('/instructors-update', fn() => InstructorController::update());
+
+Router::add('/instructor-deactivate', fn() => InstructorController::deactivate());
+
+// (~) Admin Page Routes
+Router::add('/admins', fn() => AdminController::index());
+
+Router::add('/admins-create', fn() => AdminController::create());
+
+Router::add('/admins-view', fn() => AdminController::view());
+
+Router::add('/admins-edit', fn() => AdminController::edit());
+Router::add('/admins-update', fn() => AdminController::update());
+
+Router::add('/admins-deactivate', fn() => AdminController::deactivate());
+
 // (~) Ajax Routes
 Router::add('/active_students', fn() => Ajax::activeStudents());
 Router::add('/inactive_students', fn() => Ajax::inactiveStudents());
@@ -70,9 +90,15 @@ Router::add('/courses_offered', fn() => Ajax::coursesOffered());
 Router::add('/enrolled_students', fn() => Ajax::enrolledStudents());
 
 Router::add('/instructors_table', fn() => Ajax::activeInstructors());
+Router::add('/inactive_instructors', fn() => Ajax::inactiveInstructors());
+
+Router::add('/active_admins', fn() => Ajax::activeAdmins());
+Router::add('/inactive_admins', fn() => Ajax::inactiveAdmins());
 
 Router::add('/archive', fn() => ArchiveController::index());
 Router::add('/archive_restore_student', fn() => ArchiveController::restoreStudent());
+Router::add('/archive_restore_instructor', fn() => InstructorController::restoreInstructor());
+Router::add('/archive_restore_admin', fn() => AdminController::restoreAdmin());
 
 Router::add('/pending_grading_details', fn() => Ajax::pendingGradingDetails());
 

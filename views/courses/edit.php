@@ -1,8 +1,8 @@
 <?php
 $courses = Course::find($_GET['id']);
-$course_id = $courses->course_id;
-$course_code = $courses->code;
-$course_name = $courses->name;
+$course_id = $courses['course_id'];
+$course_code = $courses['code'];
+$course_name = $courses['name'];
 ?>
 
 <div class="d-flex flex-column gap-3">

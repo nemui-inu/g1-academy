@@ -35,11 +35,10 @@ class Course extends Model
       $stmt->execute([$id]);
       $result = $stmt->fetchAll();
 
-      $result = count($result) > 0 ? $result[0] : false;
+      return count($result) > 0 ? $result[0] : false;
     } catch (Exception $e) {
       echo '(!) Error preparing statement: ' . $e->getMessage();
     }
-    return $result ? new self($result) : null;
   }
 
   public static function create($data)
@@ -48,7 +47,7 @@ class Course extends Model
     return $result ? new self($result) : null;
   }
 
-  public function update($course_id, array $data)
+  public function update(array $data)
   {
     try {
       $set = implode(', ', array_map(fn($key) => "$key = :$key", array_keys($data)));
@@ -60,10 +59,10 @@ class Course extends Model
         $stmt->bindValue(":$key", $value);
       }
 
-      $stmt->bindValue(':course_id', $course_id);
+      $stmt->bindValue(':course_id', $this->course_id);
       $stmt->execute();
 
-      $result = self::find($course_id);
+      return self::find($this->course_id);
     } catch (PDOException $e) {
       echo '(!) Error preparing statement: ' . $e->getMessage();
     }
@@ -75,7 +74,7 @@ class Course extends Model
       'code' => $this->code,
       'name' => $this->name,
     ];
-    $this->update($this->course_id, $data);
+    $this->update($data);
   }
 
   public function delete(): bool

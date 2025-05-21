@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
 if (session_status() === PHP_SESSION_NONE) {
-  session_start();
+    session_start();
 }
 // Check if the user is logged in
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 if (!isset($_SESSION['user']) && $path !== '/group1/login') {
-  header('Location: /group1/login');
-  exit;
+    header('Location: /group1/login');
+    exit;
 }
 ?>
 
@@ -70,13 +70,6 @@ if (!isset($_SESSION['user']) && $path !== '/group1/login') {
     .bg-navy {
         background-color: #1e2a5a;
         color: #ffffff;
-    }
-
-    .btn-navy {
-        background-color: #1e2a5a;
-        color: #ffffff;
-        border: none;
-        border-radius: 10px;
     }
 
     .roboto-mono {

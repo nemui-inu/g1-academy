@@ -32,13 +32,22 @@ if ($user_role === 'super-admin') {
 // Fetch students by year
 $studentsByYear = DashboardController::getStudentByYear();
 foreach ($studentsByYear as $key => $value) {
-    switch ($value['year_level']) {
-        case 1: $studentsByYear[$key]['year_level'] = '1st Year'; break;
-        case 2: $studentsByYear[$key]['year_level'] = '2nd Year'; break;
-        case 3: $studentsByYear[$key]['year_level'] = '3rd Year'; break;
-        case 4: $studentsByYear[$key]['year_level'] = '4th Year'; break;
-        default: $studentsByYear[$key]['year_level'] = 'Unknown';
-    }
+  switch ($value['year_level']) {
+    case 1:
+      $studentsByYear[$key]['year_level'] = '1st Year';
+      break;
+    case 2:
+      $studentsByYear[$key]['year_level'] = '2nd Year';
+      break;
+    case 3:
+      $studentsByYear[$key]['year_level'] = '3rd Year';
+      break;
+    case 4:
+      $studentsByYear[$key]['year_level'] = '4th Year';
+      break;
+    default:
+      $studentsByYear[$key]['year_level'] = 'Unknown';
+  }
 }
 ?>
 
@@ -50,7 +59,8 @@ foreach ($studentsByYear as $key => $value) {
     <div class="d-flex flex-column gap-3 mb-4">
       <p class="mb-0 text-navy fw-bold" style="font-size: 20px;">Totals</p>
       <div class="d-flex flex-row gap-3 flex-wrap">
-        <?php $i = 0; foreach ($totals as $key => $count): ?>
+        <?php $i = 0;
+        foreach ($totals as $key => $count): ?>
         <div class="container-fluid m-0 px-4 pt-3 pb-4 bg-white rounded-3 d-flex flex-row gap-0 justify-content-between align-items-center shadow-sm" style="min-width: 200px; flex: 1 1 200px;">
           <p class="mb-0 roboto-mono-bold text-navy lh-1" style="font-size: 34px;"><?= $count ?></p>
           <div class="d-flex flex-row align-items-center justify-content-start gap-2">
@@ -70,12 +80,23 @@ foreach ($studentsByYear as $key => $value) {
         <p class="mb-0 text-navy fw-bold" style="font-size: 20px;">Students</p>
         <div class="container-fluid m-0 p-3 bg-white shadow-sm rounded-3">
           <?php
-            $studentsData = $dashboard->getStudentsPerYearLevel();
-            $courses = array_keys($studentsData);
-            $studentsByYearData = array_column($dashboard->getStudentsPerYearLevel(), 'count');
+          $studentsData = $dashboard->getStudentsPerYearLevel();
+          $courses = array_keys($studentsData);
+
+          // Calculate total students per year level across all courses
+          $yearLabels = ['1st Year', '2nd Year', '3rd Year', '4th Year'];
+          $studentsByYearData = array_fill(0, count($yearLabels), 0);
+
+          foreach ($studentsData as $courseData) {
+            foreach ($yearLabels as $i => $year) {
+              if (isset($courseData[$year])) {
+                $studentsByYearData[$i] += $courseData[$year];
+              }
+            }
+          }
           ?>
           <select id="course-select" class="form-select mb-3">
-            <option disabled selected>Select Course</option>
+            <option value="all" selected>All Courses</option>
             <?php foreach ($courses as $course): ?>
               <option value="<?= htmlspecialchars($course) ?>"><?= htmlspecialchars($course) ?></option>
             <?php endforeach; ?>
@@ -92,17 +113,18 @@ foreach ($studentsByYear as $key => $value) {
         <div class="container-fluid m-0 bg-white shadow-sm p-3 rounded-3 d-flex flex-column justify-content-between h-100">
           <div class="d-flex flex-column gap-1">
             <?php
-              $instructors = $dashboard->getActiveInstructors();
+            $instructors = $dashboard->getActiveInstructors();
 
-              if (!empty($instructors)) {
-                  $count = 0;
-                  foreach ($instructors as $instructor) {
-                      if ($count >= 6) break;
+            if (!empty($instructors)) {
+              $count = 0;
+              foreach ($instructors as $instructor) {
+                if ($count >= 6)
+                  break;
 
-                      $name = htmlspecialchars($instructor['name'] ?? 'N/A');
-                      $email = htmlspecialchars($instructor['email'] ?? 'N/A');
+                $name = htmlspecialchars($instructor['name'] ?? 'N/A');
+                $email = htmlspecialchars($instructor['email'] ?? 'N/A');
 
-                      echo '
+                echo '
                       <div class="d-flex flex-row justify-content-between align-items-center bg-dirtywhite rounded-2" style="padding: 8px 14px;">
                         <div class="d-flex flex-row align-items-center gap-3">
                           <img src="public/img/avatar.jpg" alt="avatar" class="rounded-circle" style="width: 32px; height: 32px; object-fit: cover; object-position: 0% 25%;" />
@@ -113,11 +135,11 @@ foreach ($studentsByYear as $key => $value) {
                         </div>
                         <a href="/group1/dashboard" class="btn btn-sm px-3 btn-navy rounded-1">Details</a>
                       </div>';
-                      $count++;
-                  }
-              } else {
-                  echo '<p class="text-muted">No active instructors found.</p>';
+                $count++;
               }
+            } else {
+              echo '<p class="text-muted">No active instructors found.</p>';
+            }
             ?>
           </div>
           <div class="text-center fw-semibold mt-3">
@@ -136,19 +158,20 @@ foreach ($studentsByYear as $key => $value) {
         <div class="container-fluid m-0 p-3 bg-white shadow-sm rounded-3">
           <div class="d-flex flex-column gap-1">
             <?php
-              $topCourses = $dashboard->getTopCourses();
-              $opacity = ['100', '75', '50'];
+            $topCourses = $dashboard->getTopCourses();
+            $opacity = ['100', '75', '50'];
 
-              if (!empty($topCourses)) {
-                  $count = 0;
-                  foreach ($topCourses as $index => $course) {
-                      if ($count >= 3) break;
+            if (!empty($topCourses)) {
+              $count = 0;
+              foreach ($topCourses as $index => $course) {
+                if ($count >= 3)
+                  break;
 
-                      $rank = $index + 1;
-                      $course_name = htmlspecialchars($course['course_name'] ?? 'N/A');
-                      $student_count = (int)($course['student_count'] ?? 0);
+                $rank = $index + 1;
+                $course_name = htmlspecialchars($course['course_name'] ?? 'N/A');
+                $student_count = (int) ($course['student_count'] ?? 0);
 
-                      echo '
+                echo '
                       <div class="d-flex flex-row justify-content-between align-items-center bg-dirtywhite rounded-2" style="padding: 8px 14px;">
                         <div class="d-flex flex-row align-items-center gap-3">
                           <p class="mb-0 fw-bold roboto-mono-bold opacity-' . $opacity[$count] . '" style="font-size: 18px;">#' . $rank . '</p>
@@ -159,11 +182,11 @@ foreach ($studentsByYear as $key => $value) {
                         </div>
                         <a href="/group1/dashboard" class="btn btn-sm px-3 btn-navy rounded-1">Details</a>
                       </div>';
-                      $count++;
-                  }
-              } else {
-                  echo '<p class="text-muted">No course data available.</p>';
+                $count++;
               }
+            } else {
+              echo '<p class="text-muted">No course data available.</p>';
+            }
             ?>
           </div>
           <div class="text-center fw-semibold mt-4">
@@ -178,18 +201,19 @@ foreach ($studentsByYear as $key => $value) {
         <div class="container-fluid m-0 p-3 bg-white shadow-sm rounded-3">
           <div class="d-flex flex-column gap-1">
             <?php
-              $subjects = $dashboard->getAllSubjects();
-              $opacity = ['100', '75', '50'];
-              if (!empty($subjects)) {
-                $count = 0;
-                foreach ($subjects as $index => $subject) {
-                  if ($count >= 3) break;
+            $subjects = $dashboard->getAllSubjects();
+            $opacity = ['100', '75', '50'];
+            if (!empty($subjects)) {
+              $count = 0;
+              foreach ($subjects as $index => $subject) {
+                if ($count >= 3)
+                  break;
 
-                  $name = htmlspecialchars($subject['name'] ?? 'N/A');
-                  $code = htmlspecialchars($subject['code'] ?? 'N/A');
-                  $enrolled = isset($subject['student_count']) ? (int)$subject['student_count'] : 0;
-                  $current_opacity = $opacity[$count] ?? '100';
-            ?>
+                $name = htmlspecialchars($subject['name'] ?? 'N/A');
+                $code = htmlspecialchars($subject['code'] ?? 'N/A');
+                $enrolled = isset($subject['student_count']) ? (int) $subject['student_count'] : 0;
+                $current_opacity = $opacity[$count] ?? '100';
+                ?>
               <div class="d-flex flex-row justify-content-between align-items-center bg-dirtywhite rounded-2" style="padding: 8px 14px;">
                 <div class="d-flex flex-row align-items-center gap-3">
                   <p class="mb-0 fw-bold roboto-mono-bold opacity-<?= $current_opacity; ?>" style="font-size: 18px;">#<?= $count + 1; ?></p>
@@ -206,11 +230,11 @@ foreach ($studentsByYear as $key => $value) {
                 <a href="/group1/dashboard" class="btn btn-sm px-3 btn-navy rounded-1">Details</a>
               </div>
             <?php
-                  $count++;
-                }
-              } else {
-                echo '<p class="text-muted mb-0">No subjects found.</p>';
+                $count++;
               }
+            } else {
+              echo '<p class="text-muted mb-0">No subjects found.</p>';
+            }
             ?>
           </div>
           <div class="text-center fw-semibold mt-4">
@@ -265,7 +289,9 @@ foreach ($studentsByYear as $key => $value) {
   document.getElementById('course-select').addEventListener('change', function () {
     const selectedCourse = this.value;
 
-    if (studentsData[selectedCourse]) {
+    if (selectedCourse === 'all') {
+      createChart(studentsByYearData, 'Students by Year');
+    } else if (studentsData[selectedCourse]) {
       const courseDataObj = studentsData[selectedCourse];
       const courseData = yearLabels.map(year => courseDataObj[year] || 0);
       createChart(courseData, selectedCourse);

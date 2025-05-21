@@ -22,6 +22,11 @@ class User extends Model
         $this->$key = $value;
       }
     }
+
+    $db = new Database();
+    $conn = $db->getConnection();
+
+    self::setConnection($conn);
   }
 
   public static function all()
@@ -32,8 +37,16 @@ class User extends Model
 
   public static function find($id)
   {
-    $result = parent::find($id);
-    return $result ? new self($result) : null;
+    try {
+      $sql = 'select * from ' . static::$table . ' where user_id = ?;';
+      $stmt = self::$conn->prepare($sql);
+      $stmt->execute([$id]);
+      $result = $stmt->fetchAll();
+
+      return count($result) > 0 ? $result[0] : false;
+    } catch (Exception $e) {
+      echo '(!) Error preparing statement: ' . $e->getMessage();
+    }
   }
 
   public static function create($data)
@@ -42,19 +55,24 @@ class User extends Model
     return $result ? new self($result) : null;
   }
 
-  public function update($data)
+  public function update(array $dataset): array
   {
-    $result = parent::updateById($this->user_id, $data);
+    try {
+      $set = implode(', ', array_map(fn($key) => "$key = :$key", array_keys($dataset)));
+      $sql = 'update ' . static::$table . " set $set where user_id = :user_id;";
 
-    if ($result) {
-      foreach ($data as $key => $value) {
-        if (property_exists($this, $key)) {
-          $this->$key = $value;
-        }
+      $stmt = self::$conn->prepare($sql);
+
+      foreach ($dataset as $key => $value) {
+        $stmt->bindValue(":$key", $value);
       }
-      return true;
-    } else {
-      return false;
+
+      $stmt->bindValue(':user_id', $this->user_id);
+      $stmt->execute();
+
+      return self::find($this->user_id);
+    } catch (PDOException $e) {
+      echo '(!) Error preparing statement: ' . $e->getMessage();
     }
   }
 
