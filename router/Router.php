@@ -16,7 +16,8 @@ class Router
       call_user_func($handler);
     } else {
       http_response_code(404);
-      echo '404 Not Found';
+      // echo '404 Not Found';
+      require 'views/errors/error404.php';
     }
   }
 }
