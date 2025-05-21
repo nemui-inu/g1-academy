@@ -9,6 +9,7 @@ require_once 'controllers/CourseController.php';
 require_once 'controllers/InstructorController.php';
 require_once 'controllers/AdminController.php';
 require_once 'controllers/SubjectController.php';
+require_once 'controllers/ErrorController.php';
 
 require_once 'controllers/ArchiveController.php';
 
@@ -113,5 +114,6 @@ Router::add('/archive_restore_instructor', fn() => InstructorController::restore
 Router::add('/archive_restore_admin', fn() => AdminController::restoreAdmin());
 
 Router::add('/pending_grading_details', fn() => Ajax::pendingGradingDetails());
+
 
 Router::dispatch($path);
