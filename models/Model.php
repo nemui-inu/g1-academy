@@ -10,12 +10,6 @@ class Model
     self::$conn = $conn;
   }
 
-    public static function getConnection()
-  {
-      return self::$conn;
-  }
-
-
   public static function all()
   {
     try {
