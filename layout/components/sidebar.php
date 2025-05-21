@@ -4,35 +4,35 @@
   <div class="d-flex flex-column">
     <!-- (~) Logo Face -->
     <div class="d-flex flex-column justify-content-center align-items-center">
-      <img src="/group1/public/svg/logo-2.svg" alt="Logo" class="img-fluid" style="width: auto; height: 42px;">
+      <img src="public/svg/logo-2.svg" alt="Logo" class="img-fluid" style="width: auto; height: 42px;">
     </div>
     <!-- (~) Nav Links -->
     <div class="d-flex flex-column gap-3 align-items-start fw-semibold p-3" style="margin-top: 25px;">
-      <a href="/group1/dashboard" class="text-decoration-none <?= ($_SESSION['page'] == 'dashboard' ? 'bg-navy text-white' : 'bg-white text-navy') ?> pe-2 ps-4 py-2 w-100 rounded-3">
+      <a href="/group1/dashboard" class="text-decoration-none <?= ($_SESSION['page'] == 'dashboard') ? 'bg-navy text-white' : 'bg-white text-navy' ?> pe-2 ps-4 py-2 w-100 rounded-3">
         <i class="bi bi-bar-chart-fill me-2"></i>
         Dashboard
       </a>
-      <a href="/group1/admins" class="text-decoration-none <?= ($_SESSION['page'] == 'admins' ? 'bg-navy text-white' : 'bg-white text-navy') ?> pe-2 ps-4 py-2 w-100 rounded-3">
+      <a href="/group1/admins" class="text-decoration-none <?= ($_SESSION['page'] == 'admins') ? 'bg-navy text-white' : 'bg-white text-navy' ?> pe-2 ps-4 py-2 w-100 rounded-3">
         <i class="bi bi-diagram-3-fill me-2"></i>
         Admins
       </a>
-      <a href="/group1/instructors" class="text-decoration-none <?= ($_SESSION['page'] == 'instructors' ? 'bg-navy text-white' : 'bg-white text-navy') ?> pe-2 ps-4 py-2 w-100 rounded-3">
+      <a href="/group1/instructors" class="text-decoration-none <?= ($_SESSION['page'] == 'instructors') ? 'bg-navy text-white' : 'bg-white text-navy' ?> pe-2 ps-4 py-2 w-100 rounded-3">
         <i class="bi bi-person-workspace me-2"></i>
         Instructors
       </a>
-      <a href="/group1/students" class="text-decoration-none <?= ($_SESSION['page'] == 'students' ? 'bg-navy text-white' : 'bg-white text-navy') ?> pe-2 ps-4 py-2 w-100 rounded-3">
+      <a href="/group1/students" class="text-decoration-none <?= ($_SESSION['page'] == 'students') ? 'bg-navy text-white' : 'bg-white text-navy' ?> pe-2 ps-4 py-2 w-100 rounded-3">
         <i class="bi bi-mortarboard-fill me-2"></i>
         Students
       </a>
-      <a href="/group1/courses" class="text-decoration-none <?= ($_SESSION['page'] == 'courses' ? 'bg-navy text-white' : 'bg-white text-navy') ?> pe-2 ps-4 py-2 w-100 rounded-3">
+      <a href="/group1/courses" class="text-decoration-none <?= ($_SESSION['page'] == 'courses') ? 'bg-navy text-white' : 'bg-white text-navy' ?> pe-2 ps-4 py-2 w-100 rounded-3">
         <i class="bi bi-collection-fill me-2"></i>
         Courses
       </a>
-      <a href="/group1/subjects" class="text-decoration-none <?= ($_SESSION['page'] == 'subjects' ? 'bg-navy text-white' : 'bg-white text-navy') ?> pe-2 ps-4 py-2 w-100 rounded-3">
+      <a href="/group1/subjects" class="text-decoration-none <?= ($_SESSION['page'] == 'subjects') ? 'bg-navy text-white' : 'bg-white text-navy' ?> pe-2 ps-4 py-2 w-100 rounded-3">
         <i class="bi bi-book-half me-2"></i>
         Subjects
       </a>
-      <a href="/group1/archive" class="text-decoration-none <?= ($_SESSION['page'] == 'archive' ? 'bg-navy text-white' : 'bg-white text-navy') ?> pe-2 ps-4 py-2 w-100 rounded-3">
+      <a href="/group1/archive" class="text-decoration-none <?= ($_SESSION['page'] == 'archive') ? 'bg-navy text-white' : 'bg-white text-navy' ?> pe-2 ps-4 py-2 w-100 rounded-3">
         <i class="bi bi-archive-fill me-2"></i>
         Archive
       </a>
