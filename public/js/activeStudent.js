@@ -1,6 +1,4 @@
-let gridApi;
-
-// (~) Active Students
+let activeStudentTable;
 
 document.addEventListener("DOMContentLoaded", function () {
   const gridDiv = document.querySelector('#activeStudents');
@@ -11,47 +9,55 @@ document.addEventListener("DOMContentLoaded", function () {
     return response.json();
   }).then(data => {
     const gridOptions = {
+      rowHeight: 30,
       defaultColDef: {
-        flex: 1,
+        flex: 2,
         headerClass: 'fw-bold roboto-regular',
         cellClass: 'roboto-regular',
         filter: true,
+        sortable: true,
+        resizable: true,
       },
       domLayout: 'autoHeight',
       rowData: data,
       columnDefs: [
-        { field: 'studentID'},
-        { field: 'name', cellClass: 'fw-semibold'},
+        { field: "studentID", headerName: "Student ID" },
+        { field: "name", headerName: "Name", cellClass: "fw-semibold" },
         { field: 'gender', cellClass: 'text-capitalize'},
         { field: 'birthdate'},
-        { field: 'course'},
-        { field: 'yearLevel'},
+        { field: "course", headerName: "Course" },
+        { field: "yearLevel", headerName: "Year Level" },
         {
           headerName: 'Actions',
           field: 'actions',
           cellRenderer: (params) => {
-            const viewButton = `<button class="btn btn-sm btn-navy px-3" style="font-size: 12px;" onclick="viewStudent('${params.data.studentID}')">View</button>`;
-            const editButton = `<button class="btn btn-sm btn-yellow-2 px-3 text-navy" style="font-size: 12px;" onclick="editStudent('${params.data.studentID}')">Edit</button>`;
-            const deactivateButton = `<button class="btn btn-sm btn-red px-3" style="font-size: 12px;" onclick="deactivateStudent('${params.data.studentID}')">Deactivate</button>`;
+            const studentId = params.data.studentID;
+            const viewButton = `<button class="btn btn-sm btn-navy px-3" style="font-size: 12px;" onclick="viewStudent('${studentId}')">View</button>`;
+            const editButton = `<button class="btn btn-sm btn-yellow-2 px-3 text-navy" style="font-size: 12px;" onclick="editStudent('${studentId}')">Edit</button>`;
+            const deactivateButton = `<button class="btn btn-sm btn-red px-3" style="font-size: 12px;" onclick="deactivateStudent('${studentId}')">Deactivate</button>`;
             return viewButton + ' ' + editButton + ' ' + deactivateButton;
           },
-          flex: 1.65,
-          cellStyle: { textAlign: 'right' },
+          minWidth: 320,
+          flex: 2,
         },
       ],
       pagination: true,
-      paginationPageSize: 50,
-    }
-    gridApi = agGrid.createGrid(gridDiv, gridOptions);
-  }).catch(error => console.error('Error fetching row data: ', error));
+      paginationPageSize: 5,
+    };
+      activeStudentTable = agGrid.createGrid(gridDiv, gridOptions);
+      document.getElementById("active-students-message").textContent = "";
+    })
+    .catch(error => {
+      console.error("Error fetching pending grading tasks:", error);
+      document.getElementById("active-students-message").textContent = "Failed to load data.";
+    });
 });   
 
 function searchActiveStudentTable() {
   const searchValue = document.getElementById('searchBar').value;
-  gridApi.setGridOption(
-    "quickFilterText",
-    searchValue,
-  );
+  if (activeStudentTable) {
+    activeStudentTable.api.setQuickFilter(searchValue);
+  }
 }
 
 function viewStudent(studentId) {
@@ -64,4 +70,8 @@ function editStudent(studentId) {
 
 function deactivateStudent(studentId) {
   window.location.href = `/group1/students-deactivatestudent?id=${studentId}`;
+}
+
+function exportToPDF() {
+  window.open('/group1/reports/students_report.php', '_blank');
 }

@@ -27,7 +27,7 @@ class StudentController extends Controller
 
     require_once 'layout/header.php';
     require_once 'layout/components/frame_head.php';
-    require_once 'views/students/index.html';
+    require_once 'views/students/index.php';
     require_once 'layout/components/frame_foot.php';
     echo '<script src="public/js/activeStudent.js"></script>';
     require_once 'layout/footer.php';
