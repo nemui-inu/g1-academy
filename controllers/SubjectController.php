@@ -8,6 +8,7 @@ require_once 'controllers/InstructorController.php';
 require_once 'models/Subject.php';
 require_once 'models/Course.php';
 require_once 'models/Database.php';
+require_once 'models/Enrollment.php';
 
 class SubjectController extends Controller
 {
@@ -222,5 +223,49 @@ class SubjectController extends Controller
     } else {
       return null;
     }
+  }
+
+  public static function enroll(): void
+  {
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+      $id = $_GET['id'];
+      self::setSubjectConnection();
+      $subject = Subject::find($id);
+
+      $_SESSION['page'] = 'subjects';
+      $_SESSION['path'] = [
+        'Subjects' => '/group1/subjects',
+        'View' => '/group1/subjects-view?id=' . $id,
+        'Enroll' => '/group1/subjects-enroll?id=' . $id,
+      ];
+
+      require_once 'layout/header.php';
+      require_once 'layout/components/frame_head.php';
+      require_once 'views/subjects/enroll.php';
+      require_once 'layout/components/frame_foot.php';
+      echo '<script src="public/js/enrollmentList.js"></script>';
+      require_once 'layout/footer.php';
+    }
+  }
+
+  public static function enrollmentList(): array
+  {
+    self::setSubjectConnection();
+    StudentController::setStudentConnection();
+
+    $students = StudentController::fetchStudents('active');
+    $enrollments = Enrollment::all();
+
+    foreach ($students as $key => $student) {
+      if ($enrollments) {
+        foreach ($enrollments as $enrollment) {
+          if ($student['id'] == $enrollment->student_id) {
+            unset($students[$key]);
+            break;
+          }
+        }
+      }
+    }
+    return $students;
   }
 }

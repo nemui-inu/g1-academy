@@ -31,9 +31,30 @@ $room = $subject['room'];
         </div>
         <div class="d-flex flex-column gap-1">
           <p class="mb-0 lh-1 fw-bold text-navy" style="font-size: 18px; width: 240px;"><?= $name ?></p>
+          <p class="mb-0 lh-1 text-navy opacity-75" style="width: 240px;"><?= $catalog_no ?></p>
+        </div>
+        <div class="d-flex flex-column gap-2">
+          <p class="mb-0 lh-1 text-navy opacity-75" style="width: 240px;">
+            <i class="bi bi-person-workspace me-1"></i>
+            <?= $instructor ?>
+          </p>
+          <p class="mb-0 lh-1 text-navy opacity-75" style="width: 240px;">
+            <i class="bi bi-calendar-week me-1"></i>
+            <?= $time . ', ' . $day ?>
+          </p>
+          <p class="mb-0 lh-1 text-navy opacity-75">
+            <i class="bi bi-collection-fill me-1"></i>
+            <?= $course ?>
+          </p>
+        </div>
+        <div class="d-flex flex-column gap-2">
+          <p class="mb-0 lh-1 text-navy opacity-75">
+            <i class="bi bi-bar-chart-steps me-1"></i>
+            <?= $year . ',  ' . $sem ?>
+          </p>
         </div>
         <div class="d-flex flex-row justify-content-start">
-          <p class="mb-0 lh-1 text-navy opacity-75"><?= $id ?> Enrolled</p>
+          <p class="mb-0 lh-1 text-navy opacity-75">0 Enrolled</p>
         </div>
         <div class="d-flex flex-column gap-2 mt-3 w-100">
           <a href="/group1/courses-delete?id=<?= $id ?>" class="btn btn-sm btn-outline-red">Delete</a>
@@ -55,7 +76,7 @@ $room = $subject['room'];
               <i class="bi bi-file-earmark-pdf me-2"></i>
               <span>Export</span>
             </button>
-            <a href="courses-create" class="btn btn-sm btn-success px-3">
+            <a href="subjects-enroll?id=<?= $id ?>" class="btn btn-sm btn-success px-3">
               <i class="bi bi-plus-square me-2"></i>
               <span>Enroll</span>
             </a>

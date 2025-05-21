@@ -90,6 +90,15 @@ class Ajax
     ob_end_flush();
   }
 
+  public static function enrollmentList(): void
+  {
+    ob_start();
+    $rowData = SubjectController::enrollmentList();
+    header('Content-Type: application/json');
+    echo json_encode($rowData);
+    ob_end_flush();
+  }
+
   public static function pendingGradingDetails(): void
   {
     ob_start();

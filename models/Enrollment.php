@@ -4,7 +4,7 @@ require_once 'Model.php';
 
 class Enrollment extends Model
 {
-  protected static $table = 'enrollments';
+  protected static $table = 'subject_enrollments';
 
   public $subEnrollment_id;
   public $student_id;

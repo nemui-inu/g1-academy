@@ -90,6 +90,7 @@ Router::add('/subjects-create', fn() => SubjectController::create());
 Router::add('/subjects-add', fn() => SubjectController::add());
 
 Router::add('/subjects-view', fn() => SubjectController::view());
+Router::add('/subjects-enroll', fn() => SubjectController::enroll());
 
 // (~) Ajax Routes
 Router::add('/active_students', fn() => Ajax::activeStudents());
@@ -105,6 +106,7 @@ Router::add('/active_admins', fn() => Ajax::activeAdmins());
 Router::add('/inactive_admins', fn() => Ajax::inactiveAdmins());
 
 Router::add('/subjects_offered', fn() => Ajax::subjectsOffered());
+Router::add('/enrollment_list', fn() => Ajax::enrollmentList());
 
 // (~) Archive Page Routes
 Router::add('/archive', fn() => ArchiveController::index());
