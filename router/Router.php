@@ -15,8 +15,9 @@ class Router
       $handler = self::$routes[$path];
       call_user_func($handler);
     } else {
+      require_once 'controllers/ErrorController.php';
       http_response_code(404);
-      echo '404 Not Found';
+      ErrorController::notFound();
     }
   }
 }
