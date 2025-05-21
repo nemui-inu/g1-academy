@@ -211,4 +211,17 @@ class CourseController extends Controller
 
     return $rowData;
   }
+
+  public static function findCourse(int $id): ?Array
+  {
+    self::setCourseConnection();
+
+    $course = Course::find($id);
+
+    if ($course) {
+      return $course;
+    } else {
+      return null;
+    }
+  }
 }

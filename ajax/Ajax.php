@@ -1,9 +1,11 @@
 <?php declare(strict_types=1);
 
 require_once 'controllers/StudentController.php';
+require_once 'controllers/AdminController.php';
 require_once 'controllers/CourseController.php';
 require_once 'controllers/InstructorController.php';
 require_once 'controllers/DashboardController.php';
+require_once 'controllers/SubjectController.php';
 
 class Ajax
 {
@@ -74,6 +76,15 @@ class Ajax
   {
     ob_start();
     $rowData = AdminController::fetchAdmins('inactive');
+    header('Content-Type: application/json');
+    echo json_encode($rowData);
+    ob_end_flush();
+  }
+
+  public static function subjectsOffered(): void
+  {
+    ob_start();
+    $rowData = SubjectController::getSubjects();
     header('Content-Type: application/json');
     echo json_encode($rowData);
     ob_end_flush();

@@ -8,6 +8,7 @@ require_once 'controllers/StudentController.php';
 require_once 'controllers/CourseController.php';
 require_once 'controllers/InstructorController.php';
 require_once 'controllers/AdminController.php';
+require_once 'controllers/SubjectController.php';
 
 require_once 'controllers/ArchiveController.php';
 
@@ -82,6 +83,14 @@ Router::add('/admins-update', fn() => AdminController::update());
 
 Router::add('/admins-deactivate', fn() => AdminController::deactivate());
 
+// (~) Subject Page Routes
+Router::add('/subjects', fn() => SubjectController::index());
+
+Router::add('/subjects-create', fn() => SubjectController::create());
+Router::add('/subjects-add', fn() => SubjectController::add());
+
+Router::add('/subjects-view', fn() => SubjectController::view());
+
 // (~) Ajax Routes
 Router::add('/active_students', fn() => Ajax::activeStudents());
 Router::add('/inactive_students', fn() => Ajax::inactiveStudents());
@@ -95,6 +104,9 @@ Router::add('/inactive_instructors', fn() => Ajax::inactiveInstructors());
 Router::add('/active_admins', fn() => Ajax::activeAdmins());
 Router::add('/inactive_admins', fn() => Ajax::inactiveAdmins());
 
+Router::add('/subjects_offered', fn() => Ajax::subjectsOffered());
+
+// (~) Archive Page Routes
 Router::add('/archive', fn() => ArchiveController::index());
 Router::add('/archive_restore_student', fn() => ArchiveController::restoreStudent());
 Router::add('/archive_restore_instructor', fn() => InstructorController::restoreInstructor());
