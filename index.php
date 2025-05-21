@@ -83,3 +83,12 @@ if (!Router::dispatch($path)) {
   include 'views/error/404.php';
 }
 
+<<<<<<< Updated upstream
+=======
+if (!Router::dispatch($path)) {
+  http_response_code(404);
+  include 'views/errors/error404.php';
+  exit;
+}
+
+>>>>>>> Stashed changes
