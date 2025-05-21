@@ -159,7 +159,7 @@ class StudentController extends Controller
       $studentId .= '000';
     } else if ($currentId > 9 && $currentId < 100) {
       $studentId .= '00';
-    } else if ($currenttId > 99 && $currentId < 1000) {
+    } else if ($currentId > 99 && $currentId < 1000) {
       $studentId .= '0';
     }
 
@@ -270,6 +270,7 @@ class StudentController extends Controller
         'birthdate' => (new DateTime($student->birthdate))->format('d M Y'),
         'course' => $courseMap[$student->course_id] ?? 'Unknown',
         'yearLevel' => $yearLevels[$student->year_level] ?? $student->year_level,
+        'updated_at' => $student->updated_at,
       ];
     }, $students);
 

@@ -1,13 +1,15 @@
 <?php
 
-class Database {
+class Database
+{
   private $host = 'localhost';
   private $user = 'root';
   private $password = 'root';
   private $dbname = 'g1_academy';
   private $conn;
 
-  public function __construct() {
+  public function __construct()
+  {
     try {
       $db = "mysql:host=$this->host;dbname=$this->dbname;charset=utf8mb4";
       $options = [
@@ -17,19 +19,22 @@ class Database {
       ];
       $this->conn = new PDO($db, $this->user, $this->password, $options);
     } catch (PDOException $e) {
-      echo "(!) Connection failed: " . $e->getMessage();
+      echo '(!) Connection failed: ' . $e->getMessage();
     }
   }
 
-  public function setConnection($conn) {
-    $this-> conn = $conn;
+  public function setConnection($conn)
+  {
+    $this->conn = $conn;
   }
 
-  public function getConnection() {
+  public function getConnection()
+  {
     return $this->conn;
   }
 
-  public function destruct() {
+  public function destruct()
+  {
     $this->conn = null;
   }
 }

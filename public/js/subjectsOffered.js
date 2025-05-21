@@ -4,7 +4,7 @@ let subjectsTable;
 
 document.addEventListener("DOMContentLoaded", function () {
   const gridDiv = document.querySelector('#subjectsOffered');
-  fetch('group1/courses_offered').then(response => {
+  fetch('group1/subjects_offered').then(response => {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -20,10 +20,12 @@ document.addEventListener("DOMContentLoaded", function () {
       domLayout: 'autoHeight',
       rowData: data,
       columnDefs: [
-        { field: 'id', hide: true, },
-        { field: 'code', headerName: 'Course Code', flex: 1},
-        { field: 'name', headerName: 'Course Name', cellClass: 'fw-semibold', flex: 3},
-        { field: 'enrolled', headerName: 'Enrolled', cellClass: 'roboto-mono-regular'},
+        { field: 'code', headerName: 'Code'},
+        { field: 'name', headerName: 'Name', cellClass: 'fw-semibold',flex: 2},
+        { field: 'course_id', headerName: 'Course'},
+        { field: 'year_level', headerName: 'Year Level'},
+        { field: 'semester', headerName: 'Semester'},
+        { field: 'instructor_id', headerName: 'Instructor', flex: 2},
         {
           headerName: 'Actions',
           field: 'actions',
@@ -34,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return viewButton + ' ' + editButton + ' ' + deleteButton;
           },
           cellStyle: { textAlign: 'right' },
-          flex: 1.5,
+          flex: 2,
         },
       ],
       pagination: true,
@@ -53,13 +55,13 @@ function searchSubjectsTable() {
 }
 
 function viewSubject(id) {
-  window.location.href = `/group1/subject-view?id=${id}`;
+  window.location.href = `/group1/subjects-view?id=${id}`;
 }
 
 function editSubject(id) {
-  window.location.href = `/group1/subject-edit?id=${id}`;
+  window.location.href = `/group1/subjects-edit?id=${id}`;
 }
 
 function deleteSubject(id) {
-  window.location.href = `/group1/subject-delete?id=${id}`;
+  window.location.href = `/group1/subjects-delete?id=${id}`;
 }

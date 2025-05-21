@@ -1,5 +1,5 @@
 <?php
-$results = InstructorController::fetchInstructors('all');
+$results = AdminController::fetchAdmins('all');
 
 foreach ($results as $result) {
   $id = $result['id'];
@@ -10,7 +10,7 @@ $id += 1;
 ?>
 
 <div class="d-flex flex-column gap-3">
-  <p class="mb-0 text-navy fw-bold" style="font-size: 20px;">New Instructor</p>
+  <p class="mb-0 text-navy fw-bold" style="font-size: 20px;">New Admin</p>
   <div class="text-navy container-fluid p-0 m-0 p-3 bg-white rounded-3 d-flex flex-column gap-0 justify-content-center shadow-sm">
     <form action="/group1/instructors-addinstructor" method="POST" class="d-flex flex-column gap-3">
       <div class="d-flex flex-row gap-3">
@@ -41,7 +41,7 @@ $id += 1;
           <input type="text" id="instructorStatus" name="status" value="Active" class="form-control" style="font-size: 14px;" readonly />
         </div>
       </div>
-      <input type="hidden" name="role" value="Instructor">
+      <input type="hidden" name="role" value="Admin">
       <div class="d-flex flex-row gap-2 align-items-center justify-content-end mt-3">
         <a href="/group1/instructors" class="btn btn-outline-navy btn-sm px-5">Cancel</a>
         <button type="submit" class="btn btn-navy btn-sm px-5">Submit</button>
