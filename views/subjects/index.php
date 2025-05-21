@@ -22,7 +22,6 @@
         </div>
         <!-- (~) Table -->
         <div id="subjectsOffered" class="" ></div>
-        
       </div>
     </div>
   </div>

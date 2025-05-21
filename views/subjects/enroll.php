@@ -8,14 +8,14 @@
         <div class="d-flex flex-row align-items-center justify-content-center mb-3 gap-3">
           <!-- (~) Search Bar -->
           <div class="d-flex flex-row align-items-center gap-2 w-25">
-            <input type="text" id="searchCourses" class="form-control w-100" style="font-size: 14px;" placeholder="Search students ..." oninput="searchCoursesTable()">
+            <input type="text" id="enrollmentSearch" class="form-control w-100" style="font-size: 14px;" placeholder="Search students ..." oninput="enrollSearch()">
           </div>
         </div>
         <!-- (~) Table -->
-        <div id="studentsEnroll" class="" ></div>
+        <div id="inactiveStudents" class="" ></div>
         <!-- (~) GoBack Button -->
         <div class="d-flex flex-row align-items-center justify-content-end mt-3 gap-3">
-          <a href="#" class="btn btn-sm btn-outline-gray px-3">Go Back</a>
+          <a href="subjects-view?id=<?= $_GET['id'] ?>" class="btn btn-sm btn-outline-gray px-3">Go Back</a>
         </div>
       </div>
     </div>

@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const enrollButton = 
             `<button class="btn btn-sm btn-green fw-semibold text-white px-3" style="font-size: 12px;" onclick="restoreStudent('${params.data.studentID}')">
               Enroll
-              <i class="bi bi-plus ms-1"></i>
             </button>`;
             const flexFoot = `</div>`;
             const html = flexHead + enrollButton + flexFoot;
@@ -47,18 +46,14 @@ document.addEventListener("DOMContentLoaded", function () {
   }).catch(error => console.error('Error fetching row data: ', error));
 });   
 
-function onSearchBarInput() {
-  const searchValue = document.getElementById('inactiveStudentSearch').value;
+function enrollSearch() {
+  const searchValue = document.getElementById('enrollmentSearch').value;
   inactiveTable.setGridOption(
     "quickFilterText",
     searchValue,
   );
 }
 
-function deleteStudent(studentId) {
-  alert(`Permanently Delete student with ID: ${studentId}`);
-}
-
-function restoreStudent(studentId) {
-  window.location.href = `/group1/archive_restore_student?id=${studentId}`;
+function enrollStudent(studentId) {
+  window.location.href = `/group1/subjects-enroll-student?id=${studentId}`;
 }

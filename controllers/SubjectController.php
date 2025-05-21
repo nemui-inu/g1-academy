@@ -191,7 +191,7 @@ class SubjectController extends Controller
         require_once 'layout/components/frame_head.php';
         include 'views/subjects/view.php';
         require_once 'layout/components/frame_foot.php';
-        echo '<script src="public/js/studentEnrolled.js"></script>';
+        echo '<script src="public/js/inactiveStudent.js"></script>';
         require_once 'layout/footer.php';
       } else {
         echo 'Subject not found.';

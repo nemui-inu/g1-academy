@@ -9,7 +9,7 @@ $allCourses = CourseController::getCourses();
 $enrolled = 0;
 
 foreach ($allCourses as $eachCourse) {
-  if ($eachCourse['id'] == $course->course_id) {
+  if ($eachCourse['id'] == $course['course_id']) {
     $enrolled = $eachCourse['enrolled'];
   }
 }
@@ -27,17 +27,17 @@ foreach ($allCourses as $eachCourse) {
       <div class="d-flex flex-column gap-4 bg-white shadow-sm rounded-3 p-3">
         <!-- (~) Pseudo Logo -->
         <div class="bg-navy rounded-2 d-flex align-items-center justify-content-center" style="width: 240px; height: 220px;">
-          <p class="mb-0 fw-bold text-white text-center roboto-mono-bold m-0 p-0" style="font-size: 72px;"><?= $course->code ?></p>
+          <p class="mb-0 fw-bold text-white text-center roboto-mono-bold m-0 p-0" style="font-size: 72px;"><?= $course['code'] ?></p>
         </div>
         <div class="d-flex flex-column gap-1">
-          <p class="mb-0 lh-1 fw-bold text-navy" style="font-size: 18px; width: 240px;"><?= $course->name ?></p>
+          <p class="mb-0 lh-1 fw-bold text-navy" style="font-size: 18px; width: 240px;"><?= $course['name'] ?></p>
         </div>
         <div class="d-flex flex-row justify-content-start">
           <p class="mb-0 lh-1 text-navy opacity-75"><?= $enrolled ?> Enrolled</p>
         </div>
         <div class="d-flex flex-column gap-2 mt-3 w-100">
-          <a href="/group1/courses-delete?id=<?= $course->course_id ?>" class="btn btn-sm btn-outline-red">Delete</a>
-          <a href="/group1/courses-edit?id=<?= $course->course_id ?>" class="btn btn-sm btn-navy">Edit</a>
+          <a href="/group1/courses-delete?id=<?= $course['course_id'] ?>" class="btn btn-sm btn-outline-red">Delete</a>
+          <a href="/group1/courses-edit?id=<?= $course['course_id'] ?>" class="btn btn-sm btn-navy">Edit</a>
         </div>
       </div>
     </div>
@@ -62,7 +62,7 @@ foreach ($allCourses as $eachCourse) {
           </div>
         </div>
         <!-- (~) Table -->
-         <?php $_SESSION['enrolled_table'] = $course->code; ?>
+         <?php $_SESSION['enrolled_table'] = $course['code'] ?>
         <div id="studentEnrolled" class=""></div>
       </div>
     </div>
