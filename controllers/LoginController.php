@@ -10,12 +10,16 @@ class LoginController extends Controller
 
   public static function index(): void
   {
+    if (isset($_SESSION['user'])) {
+      header('Location: /group1/dashboard');
+      exit;
+    }
     Controller::load(self::$dir);
   }
 
   public static function login(): void  // (i) form action
   {
-    if ($_SESSION['user'] ?? null) {
+    if (isset($_SESSION['user'])) {
       header('Location: /group1/dashboard');
       exit;
     }
