@@ -9,8 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
     return response.json();
   }).then(data => {
     const gridOptions = {
+      rowHeight: 30,
       defaultColDef: {
-        flex: 1,
+        flex: 2,
         headerClass: 'fw-bold roboto-regular',
         cellClass: 'roboto-regular',
         filter: true,
@@ -54,11 +55,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });   
 
 function searchActiveStudentTable() {
-  const searchValue = document.getElementById('searchBarBar').value;
-  instructorTable.setGridOption(
-    "quickFilterText",
-    searchValue,
-  );
+  const searchValue = document.getElementById('searchActiveStudentBar').value;
+  activeStudentTable.setGridOption("quickFilterText", searchValue);
 }
 
 function viewStudent(studentId) {

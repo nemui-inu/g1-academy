@@ -73,6 +73,7 @@ class User extends Model
       return self::find($this->user_id);
     } catch (PDOException $e) {
       echo '(!) Error preparing statement: ' . $e->getMessage();
+      return [];
     }
   }
 

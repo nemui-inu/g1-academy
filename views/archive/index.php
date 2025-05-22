@@ -49,19 +49,25 @@
           <!-- (~) Table Utilities -->
           <div class="d-flex flex-row align-items-center justify-content-between mb-3">
             <!-- (~) Search Bar -->
-            <input type="text" id="inactiveStudentSearch" class="form-control w-25" style="font-size: 14px;" placeholder="Search students ..." oninput="onSearchBarInput()">
+            <input type="text" id="inactiveStudentSearch" class="form-control w-25" style="font-size: 14px;" placeholder="Search students ..." oninput="searchInactiveStudentTable()">
             <!-- (~) Buttons -->
             <div class="d-flex flex-row gap-2 align-items-center justify-content-center">
-              <button class="btn btn-sm btn-gray px-3">
+              <button class="btn btn-sm btn-gray px-3" onclick="exportToPDF()">
                 <i class="bi bi-file-earmark-pdf me-2"></i>
                 <span>Export</span>
               </button>
             </div>
           </div>
           <!-- (~) Table -->
+          <p id="inactive-students-message" class="text-danger small mb-2"></p>
           <div id="inactiveStudents" class="" ></div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<!-- Script -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-grid.css" />
+      <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
+      <script src="public/js/inactiveStudents.js"></script>
